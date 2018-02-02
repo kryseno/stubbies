@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const { USERNAME, PASSWORD } = require('./config/nodemailerConfig.js');
 const pool = mysql.createPool(credentials);
 
-// BEGIN NODEMAILER
+// nodemailer
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -13,7 +13,6 @@ const transporter = nodemailer.createTransport({
       pass: PASSWORD  
     }                             
   });
-// END NODEMAILER
 
 module.exports = function (app, passport) {
     // Reading Events
