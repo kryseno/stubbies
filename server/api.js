@@ -1,14 +1,18 @@
 const credentials = require('./config/mysql_credentials');
 const mysql = require('mysql');
 
-const pool = mysql.createPool({
-    connectionLimit: 10,
-    host: 'dev.michaelahn.solutions',
-    user: 'michael',
-    password: 'michaelAhn',
-    database: 'stubbies',
-    port: 3306
-});
+const pool = mysql.createPool(credentials);
+
+// BEGIN NODEMAILER
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+      user: USERNAME,     
+      pass: PASSWORD  
+    }                             
+  });
+// END NODEMAILER
 
 module.exports = function (app, passport) {
     // Reading Events
