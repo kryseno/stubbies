@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const credentials = require('./config/mysql_credentials');
+const credentials = require('./config/mysqlCredentials');
 const pool = mysql.createPool(credentials);
 
 module.exports = function (app, passport) {
