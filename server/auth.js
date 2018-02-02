@@ -5,6 +5,7 @@ const pool = mysql.createPool(credentials);
 module.exports = function (app, passport) {
     // BEGIN ROUTING FOR PASSPORT AUTH
     app.get('/',
+    // *** NOTHING IS HAPPENING HERE???? doesnt redirect here. goes to /checkLogin ***
         function (req, res) {
             //setting Login Status on DB
             const sess = req.session.passport.user.id;
@@ -82,6 +83,7 @@ module.exports = function (app, passport) {
     // END ROUTING FOR PASSPORT AUTH
 }
 
+// *** function doesnt get called?? not in use? ***
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
