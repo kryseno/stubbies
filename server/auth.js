@@ -25,7 +25,7 @@ module.exports = function (app, passport) {
 
     app.get('/checkLogin',
         function (req, res) {
-            //retrieving isLoggedIn status from DB
+            //retrieving isLoggedIn status from passport data
             if (req.session.passport === undefined) {
                 res.json({
                     isLoggedIn: false
@@ -33,8 +33,12 @@ module.exports = function (app, passport) {
             } else {
                 const sess = req.session.passport.user.id;
                 console.log('this is the req session passport user id:', req.session.passport.user.id);
-                let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`;
-                pool.query(selectSql, function (err, results, fields) {
+                // let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`; 
+                    // ^ removed selectSql because it wasn't doing anything. wanted to update db with login status
+                let isLoggedIn = 'isLoggedIn';
+                let updateSql = `UPDATE users SET ${isLoggedIn} = 1 WHERE facebookID = ${sess}`;
+                pool.query(updateSql, function (err, results, fields) {
+                    console.log(results);
                     if (err) throw err;
                     res.json({
                         isLoggedIn: true
