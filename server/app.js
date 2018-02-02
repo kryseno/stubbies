@@ -1,12 +1,6 @@
 const express = require('express');
-const credentials = require('./config/mysql_credentials');
-const mysql = require('mysql');
-const bodyParser = require('body-parser');
 const path = require('path');
 const morgan = require('morgan'); // Logger middleware for terminal
-const cookieParser = require('cookie-parser');
-const nodemailer = require('nodemailer');
-const { USERNAME, PASSWORD } = require('./config/nodemailerConfig.js');
 
 const app = express();
 
@@ -19,12 +13,9 @@ const app = express();
 const passport = require('passport');
 const session = require('express-session');
 
-var facebook = {};
-
-//bodyParser
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use( bodyParser.json() );
-app.use(cookieParser());
+//express
+app.use(express.urlencoded({ extended: false }));
+app.use( express.json() );
 
 //CORS
 app.use(function(req, res, next) {

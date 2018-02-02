@@ -1,5 +1,7 @@
 const credentials = require('./config/mysql_credentials');
 const mysql = require('mysql');
+const nodemailer = require('nodemailer');
+const { USERNAME, PASSWORD } = require('./config/nodemailerConfig.js');
 
 const pool = mysql.createPool(credentials);
 
