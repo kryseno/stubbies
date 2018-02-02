@@ -10,8 +10,6 @@ module.exports = function(passport){
             let sql = "SELECT * FROM ?? WHERE ?? = ?";
             let inserts = ['users', 'facebookID', profile.id];
             sql = mysql.format(sql, inserts);
-            console.log('this is the profile info form passport strat:', profile);
-    
     
             pool.query(sql, function(err, results, fields) {
                 if (err) throw err;
@@ -20,11 +18,9 @@ module.exports = function(passport){
                     console.log('these are the results from passport strat:', results);
                     let { id, emails: [{value: emailVal}], name: { givenName , familyName}, photos: [{value: photoVal}] } = profile;
                     let isLoggedIn = 1;
-    
                     let sql = "INSERT INTO ??(??, ??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?, ?)";
                     let inserts = ['users', 'facebookID', 'email', 'first_name', 'last_name', 'pictureURL', 'isLoggedIn',
                         id, emailVal, givenName, familyName, photoVal, isLoggedIn];
-    
                     sql = mysql.format(sql, inserts);
     
                     pool.query(sql, function(err, results, fields) {

@@ -33,7 +33,6 @@ module.exports = function (app, passport) {
                 });
             } else {
                 const sess = req.session.passport.user.id;
-                console.log('this is the req session passport user id:', req.session.passport.user.id);
                 // let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`; 
                     // ^ removed selectSql because it wasn't doing anything. wanted to update db with login status
                 let isLoggedIn = 'isLoggedIn';
