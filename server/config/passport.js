@@ -1,5 +1,8 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
 const facebookCreds = require('./config/facebookCreds.js');
+const mysql = require('mysql');
+const credentials = require('./config/mysql_credentials');
+const pool = mysql.createPool(credentials);
 
 module.exports = function(passport){
     passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL

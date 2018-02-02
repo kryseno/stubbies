@@ -1,17 +1,15 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan'); // Logger middleware for terminal
-
 const app = express();
+const passport = require('passport');
+const session = require('express-session');
 
 // const routes = require('./routes/index');
 // app.use('/', routes);
 // const passportRoutes = require('./routes/passport');
 // const dbtest = require('./routes/index');
 // app.use('/', dbtest);
-
-const passport = require('passport');
-const session = require('express-session');
 
 //express
 app.use(express.urlencoded({ extended: false }));
