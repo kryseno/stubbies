@@ -1,14 +1,6 @@
-const credentials = require('./config/mysql_credentials');
 const mysql = require('mysql');
-
-const pool = mysql.createPool({
-    connectionLimit: 10,
-    host: 'dev.michaelahn.solutions',
-    user: 'michael',
-    password: 'michaelAhn',
-    database: 'stubbies',
-    port: 3306
-});
+const credentials = require('./config/mysqlCredentials');
+const pool = mysql.createPool(credentials);
 
 module.exports = function (app, passport) {
     // BEGIN ROUTING FOR PASSPORT AUTH
@@ -84,4 +76,12 @@ module.exports = function (app, passport) {
         }
     );
     // END ROUTING FOR PASSPORT AUTH
+}
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+
+    res.redirect('/');
 }

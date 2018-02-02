@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
 
-// const eventsRoutes = require('./events');
-// router.use('/', eventsRoutes);
+// // const eventsRoutes = require('./events');
+// // router.use('/', eventsRoutes);
 
-const dbtest = require('./dbtest');
-router.use('/', dbtest);
+// const dbtest = require('./dbtest');
+// router.use('/', dbtest);
 
-module.exports = router;
+// module.exports = router;
