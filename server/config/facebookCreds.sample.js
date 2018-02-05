@@ -1,5 +1,6 @@
 module.exports = {
     clientID: "FACEBOOK_APP_ID",
     clientSecret: "FACEBOOK_APP_SECRET",
-    callbackURL: "http://localhost:8000/login/facebook/callback"
+    callbackURL: "CALLBACK_URL",
+    profileFields: ["FIELD", "FIELD", "FIELD", "FIELD"]
 }

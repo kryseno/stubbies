@@ -1,19 +1,9 @@
 const express = require('express');
 const path = require('path');
-const morgan = require('morgan'); // Logger middleware for terminal
-const app = express();
-const passport = require('passport');
+const morgan = require('morgan');
 const session = require('express-session');
-
-// const routes = require('./routes/index');
-// app.use('/', routes);
-// const passportRoutes = require('./routes/passport');
-// const dbtest = require('./routes/index');
-// app.use('/', dbtest);
-
-//express
-app.use(express.urlencoded({ extended: false }));
-app.use( express.json() );
+const passport = require('passport');
+const app = express();
 
 //CORS
 app.use(function(req, res, next) {
@@ -24,9 +14,11 @@ app.use(function(req, res, next) {
 });
 
 //Express
+app.use(express.urlencoded({ extended: false }));
+app.use( express.json() );
 app.use(express.static(path.join(__dirname, "..", "client", "dist")));
 
-//Morgan
+//Morgan: Logger middleware for terminal
 app.use(morgan('dev'));
 
 //Session
