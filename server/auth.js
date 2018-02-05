@@ -38,7 +38,6 @@ module.exports = function (app, passport) {
                 let isLoggedIn = 'isLoggedIn';
                 let updateSql = `UPDATE users SET ${isLoggedIn} = 1 WHERE facebookID = ${sess}`;
                 pool.query(updateSql, function (err, results, fields) {
-                    console.log(results);
                     if (err) throw err;
                     res.json({
                         isLoggedIn: true
