@@ -56,6 +56,7 @@ module.exports = function (app, passport) {
             }
         });
 
+    // Grabbing User Events
     app.get('/user_events', function (req, res) {
         if (req.session.passport !== undefined) {
             const connection = mysql.createConnection(credentials);
@@ -210,8 +211,6 @@ module.exports = function (app, passport) {
         });
         //End Nodemailer
     });
-
-
 
     // Joining Events
     app.post('/join_events', function (req, res) {

@@ -5,7 +5,7 @@ const credentials = require('./mysqlCredentials');
 const pool = mysql.createPool(credentials);
 
 module.exports = function(passport){
-    passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL
+    passport.use(new FacebookStrategy(facebookCreds,
         function (accessToken, refreshToken, profile, cb) {
             let sql = "SELECT * FROM ?? WHERE ?? = ?";
             let inserts = ['users', 'facebookID', profile.id];
