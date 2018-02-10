@@ -21,12 +21,10 @@ class ProfileLinkToggle extends Component {
     renderProfileLink() {
 
         this.props.userAuth().then((resp) => {
-            console.log('response: ', resp);
             this.setState({
                 isLoggedIn: resp.payload.data.isLoggedIn
             })
         }).catch((resp) => {
-            console.log("This is the error", resp);
         })
     }
 
