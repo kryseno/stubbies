@@ -1,0 +1,91 @@
+.createEvent {
+    position: relative;
+}
+
+.mapView {
+    width: 100%;
+    height: 100%;
+}
+
+.createMap {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #428bca;
+}
+
+.locationForm {
+    height: 100%;
+    width: 100%;
+}
+
+.locationFormComp:first-child {
+    padding-top: 1%;
+}
+
+.locationFormComp {
+    height: 50vmin;
+    margin: 1% 0;
+}
+
+.locationPadding {
+    padding-top: 10%;
+}
+
+.leftOfMap {
+    margin-top: 1%;
+}
+
+.form-group {
+    margin: 1% 0;
+}
+
+.bottons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.maxSizeNote {
+    color: gray;
+    display: inline-block;
+    float: right;
+    margin-right: 7%;
+}
+
+
+@media screen and (max-width: 768px) {
+    .allSelect {
+        display: block;
+        height: auto;
+    }
+
+    .allSelect > label {
+        margin: 0 0 5px 5%;
+    }
+
+    .selectInput {
+        margin: 0;
+    }
+
+    .locationPadding {
+        padding: 0;
+    }
+
+    .locationFormComp {
+        padding: 0;
+    }
+    
+    .leftOfMap {
+        padding: 0;
+    }
+
+    .maxSizeNote {
+        color: gray;
+        display: inline-block;
+        margin: 0 0 10px 5%;
+    }
+
+    .selectDivContainer > select {
+        margin-bottom: 10px
+    }
+}

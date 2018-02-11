@@ -1,0 +1,142 @@
+.container{
+    background-color: white;
+    opacity: .9;
+}
+
+.banner {
+    margin: 0;
+    text-align: center;
+    background-image: url('../../assets/images/open_book.png');
+    background-size: contain;
+    background-position: 50% 50%;
+    padding: 25px 30px;
+    opacity: 1;
+}
+
+.banner > img {
+    height: 140px;
+}
+
+.banner > h2 {
+	background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
+    background-size: 150px;
+    -webkit-background-size: 150px;
+    color: rgba(104, 169, 196, 0.228);
+    background-clip: text;
+	-webkit-background-clip: text;
+	animation: shine 2s infinite;
+	text-shadow: 0 0px 0px rgba(104, 169, 196, 0.228);
+    margin-top: 3px;
+}
+
+@keyframes shine {
+	0% {
+		background-position: 0;
+	}
+	100% {
+		background-position: 100%;
+	}
+}
+
+.deviconicon {
+    font-size: 4em;
+}
+
+.passport, .meistertask {
+    height: 7vmin;
+}
+
+.listTech {
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.listTech li {
+    list-style-type: none;
+    text-align: center;
+}
+
+.techCategory h4 {
+    text-align: center;
+    border: 1px inset lightgrey;
+    box-shadow: 4px 4px 0 slategray;
+}
+
+.info > h1 {
+    text-align: center;
+}
+
+.indiv {
+    margin: 1.5% 0;
+}
+
+.about {
+    background-color: lightgrey;
+    height: 58vmin;
+}
+
+.about p {
+    font-size: 1.5em;
+}
+
+.about p:last-of-type {
+    font-size: 2em;
+}
+
+@media screen and (max-width: 768px) {
+    .banner > h2 {
+        background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.3, #fff)) 0 0 no-repeat;
+        background-size: 100px;
+        -webkit-background-size: 100px;
+        color: rgba(104, 169, 196, 0.228);
+        background-clip: text;
+        -webkit-background-clip: text;
+        animation: shine 3s infinite;
+        margin-top: 5px;
+    }
+
+    .banner {
+        padding-bottom: 60px;
+        opacity: 1;
+    }
+
+    .banner > img {
+        height: 120px;
+    }
+
+    .about > h2 {
+        text-align: center;
+    }
+
+    .about {
+        height: 115vmin;
+    }
+
+    .about p, .about p:last-of-type {
+        font-size: 1.4em;
+    }
+
+    .passport, .meistertask {
+        height: 14vmin;
+    }
+
+    .indiv {
+        text-align: center;
+    }
+
+    .indiv > a {
+        font-size: 1.5em;
+    }
+
+    .footer h4 {
+        text-align: center;
+    }
+
+    .footer {
+        position: relative;
+        border: none;
+        width: auto;
+    }
+}

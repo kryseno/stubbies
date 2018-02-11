@@ -1,0 +1,3 @@
+config/mysqlCredentials.js
+config/facebookCreds.js
+config/nodemailerConfig.js

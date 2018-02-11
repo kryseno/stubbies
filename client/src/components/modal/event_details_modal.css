@@ -1,0 +1,60 @@
+.detailsModal {
+    position: fixed;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 1000;
+}
+
+.detailsContent {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, .6);
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    height: 73vmin;
+}
+
+.event-info{
+    width: 40%;
+    word-wrap: break-word;
+}
+
+#singleMap {
+    height: 50vmin;
+    width: 50%;
+    border: 1px solid #428bca;
+}
+
+.detailsDialog {
+    width: 120vmin;
+    margin-top: 3%;
+}
+
+.detailsBody {
+    height: 55vmin;
+}
+
+@media screen and (max-width: 768px) {
+    .detailsDialog {
+        width: 100%;
+        margin-top: 1%;
+    }
+
+    .detailsContent {
+        height: 153vmin;
+    }
+
+    .detailsBody {
+        height: 81%;
+    }
+
+    #singleMap {
+        height: 45vmin;
+        width: 100%;
+        border: 1px solid #428bca;
+    }
+}
+
