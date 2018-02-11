@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/kryseno/stubbies/finalDev/client/src/assets/images/logo.png">
 
 ## About Stubbies
-Stubbies was designed for students by students. It is a social networking application that allows students to join or create study groups with other students that are located in their area.
+Stubbies was designed for students by students. It is a social networking application that allows students to join and create study groups with other students located in their area.
 
 ### Joining an Event
 Joining a study group is easy! The 'Join Event' page displays a list of current study events, as well as, a search bar and map to pinpoint events according to a student's desired location.
