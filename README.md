@@ -42,7 +42,8 @@ Stubbies aims to connect students from any school, any time, and any place to li
 </ul>
 
 ## Demo
-<img src="https://raw.githubusercontent.com/kryseno/portfolio/dev/assets/images/portfolio-stubbies.png">
-<img src="https://raw.githubusercontent.com/kryseno/portfolio/dev/assets/images/portfolio-stubbies2.png">
-<img src="https://raw.githubusercontent.com/kryseno/portfolio/dev/assets/images/portfolio-stubbies3.png">
-<img src="https://raw.githubusercontent.com/kryseno/portfolio/dev/assets/images/portfolio-stubbies4.png">
+<img src="https://raw.githubusercontent.com/kryseno/stubbies/finalDev/client/dist/assets/images/stubbiesDemo.png">
+<img src="https://raw.githubusercontent.com/kryseno/stubbies/finalDev/client/dist/assets/images/stubbiesDemo2.png">
+<img src="https://raw.githubusercontent.com/kryseno/stubbies/finalDev/client/dist/assets/images/stubbiesDemo3.png">
+<img src="https://raw.githubusercontent.com/kryseno/stubbies/finalDev/client/dist/assets/images/stubbiesDemo4.png">
+<img src="https://raw.githubusercontent.com/kryseno/stubbies/finalDev/client/dist/assets/images/stubbiesDemo5.png">
