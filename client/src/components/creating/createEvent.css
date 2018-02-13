@@ -82,7 +82,7 @@
     .maxSizeNote {
         color: gray;
         display: inline-block;
-        margin: 0 0 10px 5%;
+        margin-bottom: 10px;
     }
 
     .selectDivContainer > select {

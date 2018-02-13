@@ -14,7 +14,7 @@
     margin: auto;
     padding: 20px;
     background-color: white;
-    height: 63%;
+    height: 16vmin;
 }
 
 .confirmDialog {
@@ -22,8 +22,30 @@
     margin-top: 5%;
 }
 
+.confirmContent {
+    height: 31vmin;
+}
+
 @media screen and (max-width: 768px) {
     .confirmDialog {
         margin: auto;
+    }
+
+    .confirmContent {
+        height: 83vmin;
+    }
+
+    .confirmBody {
+        height: 50vmin;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .confirmContent {
+        height: 94vmin;
+    }
+
+    .confirmBody {
+        height: 56vmin;
     }
 }
