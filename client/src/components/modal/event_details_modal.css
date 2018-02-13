@@ -44,11 +44,12 @@
     }
 
     .detailsContent {
-        height: 153vmin;
+        height: 170vmin;
     }
 
     .detailsBody {
-        height: 81%;
+        height: 83%;
+        overflow: auto;
     }
 
     #singleMap {
@@ -57,4 +58,3 @@
         border: 1px solid #428bca;
     }
 }
-
