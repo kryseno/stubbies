@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import FacebookLogin from './fbLogin';
 import ProfileToggle from './profile_toggle';
-
+import AboutModal from '../modal/about';
 
 import './nav.css';
-import Logo from '../../assets/images/logo.png';
 
 class Nav extends Component {
     constructor (props) {
@@ -43,10 +42,7 @@ class Nav extends Component {
                         <div className="wideNav">
                             <ul className="nav nav-tabs navbar-right">
                                 <li>
-                                    <Link to='/'>Home</Link>
-                                </li>
-                                <li>
-                                    <Link to='/join-event'>Join Event</Link>
+                                    <Link to='/'>Join Event</Link>
                                 </li>
                                 <li>
                                     <Link to='/create-event'>Create Event</Link>
@@ -81,10 +77,7 @@ class Nav extends Component {
                                     <FacebookLogin />
                                 </li>
                                 <li className="otherLinks">
-                                    <Link to='/'>Home</Link>
-                                </li>
-                                <li className="otherLinks">
-                                    <Link to='/join-event'>Join</Link>
+                                    <Link to='/'>Join</Link>
                                 </li>
                                 <li className="otherLinks">
                                     <Link to='/create-event'>Create</Link>
