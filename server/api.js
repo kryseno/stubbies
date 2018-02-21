@@ -189,20 +189,17 @@ module.exports = function (app, passport) {
     // Joining Events
     app.post('/join_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let selectSql = "SELECT * FROM ?? WHERE ?? = ?";
-        let inserts = ['joined_events', 'event_id', req.body.event_id];
-        selectSql = mysql.format(selectSql, inserts);
+        let joinSql = "SELECT * FROM ?? WHERE ?? = ?";
+        let joinInserts = ['joined_events', 'event_id', req.body.event_id];
+        joinSql = mysql.format(joinSql, joinInserts);
         connection.connect(() => {
             connection.query(
-                selectSql,
+                joinSql,
                 function (err, results) {
                     function insertUserIntoEvent() {
                         let insertIntoJoinedSql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
-                        let joinedInserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', req.body.event_id];
-                        insertIntoJoinedSql = mysql.format(insertIntoJoinedSql, joinedInserts);
-                        // const insertQuery = `INSERT INTO joined_events 
-                        //                         SET facebookID = "${req.session.passport.user.id}", 
-                        //                             event_id = "${req.body.event_id}"`
+                        let userJoinedInserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', req.body.event_id];
+                        insertIntoJoinedSql = mysql.format(insertIntoJoinedSql, userJoinedInserts);
                         connection.query(
                             insertIntoJoinedSql,
                             function (err, results) {
@@ -244,13 +241,17 @@ module.exports = function (app, passport) {
                         });
                         //End Nodemailer
                     } else if (results.length !== 0 && results.length < req.body.max - 1) {
-                        let joinSelectSql = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
-                        let joinSelectInserts = ['joined_events', 'event_id', req.body.event_id, 'facebookId', req.session.passport.user.id];
-                        joinSelectSql = mysql.format(joinSelectSql, joinSelectInserts);
+                        let rejoinSql = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
+                        let rejoinInserts = ['joined_events', 'event_id', req.body.event_id, 'facebookId', req.session.passport.user.id];
+                        rejoinSql = mysql.format(rejoinSql, rejoinInserts);
                         connection.query(
-                            joinSelectSql,
+                            rejoinSql,
                             function (err, results) {
-                                res.end('duplicate');
+                                if (results.length == 0) {
+                                    insertUserIntoEvent();
+                                } else {
+                                    res.end('duplicate');
+                                }
                             }
                         )
                     } else {
