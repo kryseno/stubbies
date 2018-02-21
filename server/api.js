@@ -143,12 +143,12 @@ module.exports = function (app, passport) {
     // Deleting Events
     app.post('/delete_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        const query = `UPDATE events 
-                        SET isActive = 0 
-                        WHERE event_id = '${req.body.event_id}'`;
+        let sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+        let inserts = ['events', 'isActive', 0, 'event_id', req.body.event_id];
+        sql = mysql.format(sql, inserts);
         connection.connect(() => {
             connection.query(
-                query,
+                sql,
                 function (err, results, fields) {
                     const output = {
                         success: true,
