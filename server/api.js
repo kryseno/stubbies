@@ -268,7 +268,6 @@ module.exports = function (app, passport) {
             let sql = "SELECT ??, ??, ??, ?? AS ?? FROM ?? INNER JOIN ?? on ?? = ?? INNER JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? != ? AND ?? = ?";
             let inserts = ['joined_events.*', 'events.*', 'events_subjects.id', 'events_subjects.subject', 'e_s_subj', 'events', 'joined_events', 'joined_events.event_id', 'events.event_id', 'events_subjects', 'events_subjects.id', 'events.subject', 'joined_events.facebookID', req.session.passport.user.id, 'events.facebookID', req.session.passport.user.id, 'isActive', 1]
             sql = mysql.format(sql, inserts);
-            console.log('here is sql query for user joined', sql);
             connection.connect(() => {
                 connection.query(
                     sql,
