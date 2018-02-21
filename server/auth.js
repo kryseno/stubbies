@@ -54,12 +54,3 @@ module.exports = function (app, passport) {
         }
     );
 }
-
-// *** function doesnt get called?? not in use? ***
-// function isLoggedIn(req, res, next) {
-//     if (req.isAuthenticated()) {
-//         return next();
-//     }
-
-//     res.redirect('/');
-// }
