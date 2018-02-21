@@ -278,7 +278,6 @@ module.exports = function (app, passport) {
                                 }
                             )
                         } else {
-                            // ** condition isnt met **
                             res.end("max")
                         }
 
