@@ -87,7 +87,6 @@ class CreateEvent extends Component {
     checkLogin() {
         const isLoggedIn = null;
         this.props.userAuth().then((resp) => {
-            console.log('response: ', resp);
             this.setState({
                 isLoggedIn: resp.payload.data.isLoggedIn
             })
@@ -97,7 +96,6 @@ class CreateEvent extends Component {
                 this.toggleSignInModal();
             }
         }).catch((resp) => {
-            console.log("This is the error", resp);
         })
     }
 
