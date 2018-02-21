@@ -21,14 +21,12 @@ module.exports = function (app, passport) {
         function (req, res) {
             const connection = mysql.createConnection(credentials);
             if (req.session.passport !== undefined) {
-                const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
-                                        FROM events
-                                        JOIN events_subjects on events.subject = events_subjects.id 
-                                            AND events.isActive = 1 
-                                        WHERE events.facebookID != "${req.session.passport.user.id}"`;
+                let sql = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? AND ?? = ? WHERE ?? != ?";
+                let inserts = ['events.*', 'events_subjects.subject', 'e_s_subj', 'events', 'events_subjects', 'events.subject', 'events_subjects.id', 'events.isActive', 1, 'events.facebookID', req.session.passport.user.id];
+                sql = mysql.format(sql, inserts);
                 connection.connect(() => {
                     connection.query(
-                        queryLoggedIn,
+                        sql,
                         function (err, results, fields) {
                             const output = {
                                 success: true,
