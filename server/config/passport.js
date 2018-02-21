@@ -15,7 +15,6 @@ module.exports = function(passport){
                 if (err) throw err;
     
                 if (results.length === 0) {
-                    console.log('these are the results from passport strat:', results);
                     let { id, emails: [{value: emailVal}], name: { givenName , familyName}, photos: [{value: photoVal}] } = profile;
                     let isLoggedIn = 1;
                     let sql = "INSERT INTO ??(??, ??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?, ?)";
