@@ -85,10 +85,11 @@ module.exports = function (app, passport) {
                 function (err, results, fields) {
                     if (err) throw err;
                     else {
+                        let insertIntoJoinedSql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
+                        let joinedInserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', results.insertId];
+                        insertIntoJoinedSql = mysql.format(insertIntoJoinedSql, joinedInserts);
                         connection.query(
-                            `INSERT INTO joined_events 
-                                SET facebookID = "${req.session.passport.user.id}", 
-                                event_id = "${results.insertId}"`,
+                            insertIntoJoinedSql,
                             function (err, results) {
                                 const output = {
                                     success: true,
@@ -188,19 +189,22 @@ module.exports = function (app, passport) {
     // Joining Events
     app.post('/join_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        const selectQuery = `SELECT * 
-                                FROM joined_events 
-                                WHERE event_id = "${req.body.event_id}"`
+        let selectSql = "SELECT * FROM ?? WHERE ?? = ?";
+        let inserts = ['joined_events', 'event_id', req.body.event_id];
+        selectSql = mysql.format(selectSql, inserts);
         connection.connect(() => {
             connection.query(
-                selectQuery,
+                selectSql,
                 function (err, results) {
                     function insertUserIntoEvent() {
-                        const insertQuery = `INSERT INTO joined_events 
-                                                SET facebookID = "${req.session.passport.user.id}", 
-                                                    event_id = "${req.body.event_id}"`
+                        let insertIntoJoinedSql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
+                        let joinedInserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', req.body.event_id];
+                        insertIntoJoinedSql = mysql.format(insertIntoJoinedSql, joinedInserts);
+                        // const insertQuery = `INSERT INTO joined_events 
+                        //                         SET facebookID = "${req.session.passport.user.id}", 
+                        //                             event_id = "${req.body.event_id}"`
                         connection.query(
-                            insertQuery,
+                            insertIntoJoinedSql,
                             function (err, results) {
                                 const output = {
                                     success: true,
@@ -211,6 +215,7 @@ module.exports = function (app, passport) {
                         )
                     }
                     if (err) throw err;
+                    console.log('these are the results in the joining events when you first join', results);
                     if (results.length == 0) {
                         insertUserIntoEvent();
                         //Start Nodemailer: Email for Event JOINED
@@ -239,17 +244,13 @@ module.exports = function (app, passport) {
                         });
                         //End Nodemailer
                     } else if (results.length !== 0 && results.length < req.body.max - 1) {
+                        let joinSelectSql = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
+                        let joinSelectInserts = ['joined_events', 'event_id', req.body.event_id, 'facebookId', req.session.passport.user.id];
+                        joinSelectSql = mysql.format(joinSelectSql, joinSelectInserts);
                         connection.query(
-                            `SELECT * 
-                                FROM joined_events
-                                WHERE event_id = "${req.body.event_id}" 
-                                    AND facebookId = "${req.session.passport.user.id}"`,
+                            joinSelectSql,
                             function (err, results) {
-                                if (results.length == 0) {
-                                    insertUserIntoEvent();
-                                } else {
-                                    res.end('duplicate');
-                                }
+                                res.end('duplicate');
                             }
                         )
                     } else {
@@ -264,15 +265,12 @@ module.exports = function (app, passport) {
     //Display events user joined
     app.get('/user_joined_events', function (req, res) {
             const connection = mysql.createConnection(credentials);
+            let sql = "SELECT ??, ??, ??, ?? AS ?? FROM ?? INNER JOIN ?? on ?? = ?? INNER JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? = ?";
+            let inserts = ['joined_events.*', 'events.*', 'events_subjects.id', 'events_subjects.subject', 'e_s_subj', 'events', 'joined_events', 'joined_events.event_id', 'events.event_id', 'events_subjects', 'events_subjects.id', 'events.subject', 'joined_events.facebookID', req.session.passport.user.id, 'isActive', 1]
+            sql = mysql.format(sql, inserts);
             connection.connect(() => {
-                const query = `SELECT joined_events.*, events.*, events_subjects.id, events_subjects.subject AS e_s_subj
-                                    FROM events
-                                    INNER JOIN joined_events on joined_events.event_id = events.event_id
-                                    INNER JOIN events_subjects on events_subjects.id = events.subject
-                                    WHERE joined_events.facebookID = ${req.session.passport.user.id} 
-                                        AND isActive = 1`;
                 connection.query(
-                    query,
+                    sql,
                     function (err, results) {
                         const output = {
                             success: true,
