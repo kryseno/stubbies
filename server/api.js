@@ -21,12 +21,12 @@ module.exports = function (app, passport) {
         function (req, res) {
             const connection = mysql.createConnection(credentials);
             if (req.session.passport !== undefined) {
-                let sql = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? AND ?? = ? WHERE ?? != ?";
+                let sqlLoggedIn = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? AND ?? = ? WHERE ?? != ?";
                 let inserts = ['events.*', 'events_subjects.subject', 'e_s_subj', 'events', 'events_subjects', 'events.subject', 'events_subjects.id', 'events.isActive', 1, 'events.facebookID', req.session.passport.user.id];
-                sql = mysql.format(sql, inserts);
+                sqlLoggedIn = mysql.format(sqlLoggedIn, inserts);
                 connection.connect(() => {
                     connection.query(
-                        sql,
+                        sqlLoggedIn,
                         function (err, results, fields) {
                             const output = {
                                 success: true,
@@ -36,13 +36,17 @@ module.exports = function (app, passport) {
                         });
                 });
             } else {
-                const queryNotLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
-                                            FROM events
-                                            JOIN events_subjects on events.subject = events_subjects.id 
-                                                AND events.isActive = 1`;
+                let sqlNotLoggedIn = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? AND ?? = ??";
+                let inserts = ['events.*', 'events_subjects.subject', 'e_s_subj', 'events', 'events_subjects', 'events.subject', 'events_subjects.id', 'events.isActive', '1'];
+                sqlNotLoggedIn = mysql.format(sqlNotLoggedIn, inserts);
+                // const queryNotLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
+                //                             FROM events
+                //                             JOIN events_subjects on events.subject = events_subjects.id 
+                //                                 AND events.isActive = 1`;
+                console.log(sqlNotLoggedIn);
                 connection.connect(() => {
                     connection.query(
-                        queryNotLoggedIn,
+                        sqlNotLoggedIn,
                         function (err, results, fields) {
                             const output = {
                                 success: true,
