@@ -56,14 +56,12 @@ module.exports = function (app, passport) {
     // Grabbing User Events
     app.get('/user_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
+        let sql = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? = ?";
+        let inserts = ['events.*', 'events_subjects.subject', 'e_s_subj', 'events', 'events_subjects', 'events.subject', 'events_subjects.id', 'isActive', 1, 'facebookID', req.session.passport.user.id];
+        sql = mysql.format(sql, inserts);
         connection.connect(() => {
-            const query = `SELECT events.*, events_subjects.subject AS e_s_subj
-                            FROM events
-                            JOIN events_subjects on events.subject = events_subjects.id
-                            WHERE isActive = 1 
-                                AND facebookID = '${req.session.passport.user.id}'`;
             connection.query(
-                query,
+                sql,
                 function (err, results, fields) {
                     const output = {
                         success: true,
