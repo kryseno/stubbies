@@ -2,7 +2,6 @@ const mysql = require('mysql');
 const credentials = require('./config/mysqlCredentials');
 const nodemailer = require('nodemailer');
 const { USERNAME, PASSWORD } = require('./config/nodemailerConfig.js');
-// const joinedEmail = require('./nodemailerTemplates/eventJoined');
 const pool = mysql.createPool(credentials);
 
 // nodemailer
@@ -215,9 +214,8 @@ module.exports = function (app, passport) {
                     if (results.length == 0) {
                         insertUserIntoEvent();
                         //Start Nodemailer: Email for Event JOINED
-                        let email = require('./nodemailerTemplates/eventJoined');
-                        let mailOptions = email.joinedMail(req);
-
+                        let email = require('./nodemailerTemplates/joinedEvent');
+                        let mailOptions = email.joinedEvent(req);
                         transporter.sendMail(mailOptions, (error, info) => {
                             if (error) {} else {}
                         });
@@ -292,26 +290,8 @@ module.exports = function (app, passport) {
                     )
                     if (err) throw err;
                     //Start Nodemailer: Email for LEAVING Event
-                    const userEmail = req.session.passport.user._json.email;
-                    const userName = req.session.passport.user._json.first_name;
-                    const mailOptions = {
-                        from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
-                        to: `${userEmail}`,
-                        subject: 'You Left A Study Group!',
-                        html: `
-                            <div style='background-color: white; text-align: center; font-family: tahoma'>
-                            <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
-                            <span><i>You don't have to study lonely, with Stubbies!</i></span>
-                            <hr>
-                            <div style='text-align: left'>
-                                <h2>You have left ${req.body.title}!</h2>
-                                <p>Your study buddies are sad to see you go :( Hope to see you in another group!</p>
-                                <p>If this was a mistake, rejoin ${req.body.title} before it fills up! Join again by clicking 'Join' on the event <a href="http://dev.michaelahn.solutions/join-event">here</a>.</p>
-                                </div>
-                            </div>
-                            `
-                    };
-
+                    let email = require('./nodemailerTemplates/leftEvent');
+                    let mailOptions = email.leftEvent(req);
                     transporter.sendMail(mailOptions, (error, info) => {
                         if (error) {} else {}
                     });
