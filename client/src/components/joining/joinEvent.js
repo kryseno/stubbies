@@ -76,7 +76,7 @@ class JoinEvent extends Component {
                     const contentString = '</div>'+
                     '<h5><u>'+response.payload.data.data[i].title+'</u></h5>'+
                     '<p>Location: '+response.payload.data.data[i].location+'</p>'+
-                    '<p>Subject: '+response.payload.data.data[i].subject+'</p>'+
+                    '<p>Subject: '+response.payload.data.data[i].e_s_subj+'</p>'+
                     '<p>Max Group Size: '+response.payload.data.data[i].max+'</p>'+
                     '<p>Date of Event: '+response.payload.data.data[i].date+'</p>'+
                     '<p>Time of Event: '+response.payload.data.data[i].time+'</p>'+
