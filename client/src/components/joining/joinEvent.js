@@ -180,7 +180,7 @@ class JoinEvent extends Component {
     //     this.selectedCheckboxes = new Set();
     // }
     
-    toggleCheckbox = label => {
+    toggleCheckbox (label) {
         if (this.selectedCheckboxes.has(label)) {
             this.selectedCheckboxes.delete(label);
         } else {
@@ -188,13 +188,13 @@ class JoinEvent extends Component {
         }
     }
     
-    createCheckbox = label => (
-        <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label}/>
-    )
+    createCheckbox (label) {
+        return <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label}/>
+    }
     
-    createCheckboxes = () => (
-        filterCheck.map(this.createCheckbox)
-    )
+    createCheckboxes () {
+        return filterCheck.map(this.createCheckbox)
+    }
 
     render() {        
         return (
