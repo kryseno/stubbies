@@ -18,15 +18,19 @@ class EventList extends Component {
         if (this.props.filterValues.length > 0) {
             const arrayCheck = this.props.events;
             if (arrayCheck.length !== 0) {
-                const acceptedValues = [];
+                let acceptedValues = [];
                 const eventArray = this.props.events.data;
-                for (var f = 0; f < this.props.filterValues.length; f++) {
-                    for (var i = 0; i < eventArray.length; i++) {
-                        if (eventArray[i].e_s_subj === this.props.filterValues[f]) {
-                            acceptedValues.push(eventArray[i]);
-                        }
-                    }
-                }
+                // for (var f = 0; f < this.props.filterValues.length; f++) {
+                //     for (var i = 0; i < eventArray.length; i++) {
+                //         if (eventArray[i].e_s_subj === this.props.filterValues[f]) {
+                //             acceptedValues.push(eventArray[i]);
+                //         }
+                //     }
+                // }
+                acceptedValues = eventArray.filter((event) => {
+                    return this.props.filterValues.includes(event.e_s_subj)
+                });
+
                 if (acceptedValues.length > 0) {
                     const map = new google.maps.Map(document.getElementById('joinMap'), {
                         zoom: 10,
