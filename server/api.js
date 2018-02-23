@@ -142,39 +142,22 @@ module.exports = function (app, passport) {
             connection.query(
                 sql,
                 function (err, results, fields) {
+                    if (err) throw err;
                     const output = {
                         success: true,
                         data: results
                     };
                     res.end(JSON.stringify(output));
+
+                    //Start Nodemailer: Email for Event DELETED
+                    let email = require('./nodemailerTemplates/deletedEvent');
+                    let mailOptions = email.deletedEvent(req);
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {} else {}
+                    });
+                    //End Nodemailer
                 });
         });
-
-        //Start Nodemailer: Email for Event DELETED
-        const userEmail = req.session.passport.user._json.email;
-        const userName = req.session.passport.user._json.first_name;
-        const mailOptions = {
-            from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
-            to: `${userEmail}`,
-            subject: 'Study Group Deleted!',
-            html: `
-                <div style='background-color: white; text-align: center; font-family: tahoma'>
-                <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
-                <span><i>You don't have to study lonely, with Stubbies!</i></span>
-                <hr>
-                <div style='text-align: left'>
-                    <h2>Hi ${userName}! You have successfully deleted your study group event.</h2>
-                    <p><b>${req.body.title}</b> scheduled for <b>${req.body.date}</b> at <b>${req.body.time}</b> was deleted.</p>
-                    <p><b>If you wish to undo this, recreate your study group <a href="http://dev.michaelahn.solutions/create-event">here</a>.</b></p>
-                </div>
-                </div>
-                `
-        };
-
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {} else {}
-        });
-        //End Nodemailer
     });
 
     // Joining Events
@@ -187,7 +170,6 @@ module.exports = function (app, passport) {
             connection.query(
                 sql,
                 function (err, results) {
-                    console.log(results);
                     function insertUserIntoEvent() {
                         let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
                         let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', req.body.event_id];
@@ -200,6 +182,7 @@ module.exports = function (app, passport) {
                                     data: results
                                 };
                                 res.end(JSON.stringify(output));
+
                                 //Start Nodemailer: Email for Event JOINED
                                 let email = require('./nodemailerTemplates/joinedEvent');
                                 let mailOptions = email.joinedEvent(req);
@@ -279,6 +262,7 @@ module.exports = function (app, passport) {
                                 data: results
                             };
                             res.end(JSON.stringify(output));
+
                             //Start Nodemailer: Email for LEAVING Event
                             let email = require('./nodemailerTemplates/leftEvent');
                             let mailOptions = email.leftEvent(req);
