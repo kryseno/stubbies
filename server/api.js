@@ -89,47 +89,23 @@ module.exports = function (app, passport) {
                     connection.query(
                         sql,
                         function (err, results) {
+                            if (err) throw err;
                             const output = {
                                 success: true,
                                 data: results
                             };
                             res.end(JSON.stringify(output));
+
+                            //nodemailer
+                            let email = require('./nodemailerTemplates/createdEvent');
+                            let mailOptions = email.createdEvent(req);
+                            transporter.sendMail(mailOptions, (error, info) => {
+                                if (error) {} else {}
+                            });
                         }
                     )
                 });
         });
-
-        //Start Nodemailer: Email for Event CREATED
-        const subjArray = ["Life Sciences", "Visual and Performance Arts", "Liberal Arts", "Engineering and Technology", "Business"];
-        const nodeMailSubj = subjArray[`${req.body.subject}` - 1];
-        const mailOptions = {
-            from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
-            to: `${req.body.email}`,
-            subject: 'Study Group Created!',
-            html: `
-                <div style='background-color: white; text-align: center; font-family: tahoma'>
-                <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
-                <span><i>You don't have to study lonely, with Stubbies!</i></span>
-                <hr>
-                    <div style='text-align: left'>
-                    <h2>Here are the details of your study group!</h2>
-                    <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
-                    <p><b>Where:</b> ${req.body.location}</p>
-                    <p><b>Description:</b> ${req.body.description}</p>
-                    <p><b>Duration:</b> ${req.body.duration}</p>
-                    <p><b>Subject:</b> ${nodeMailSubj}</b></p>
-                    <p><b>Group Size:</b> ${req.body.max}</p>
-                    <p><b>Phone Provided:</b> ${req.body.phone}</p>
-                    <p><b>Email Provided:</b> ${req.body.email}</p>
-                    </div>
-                </div>
-                `
-        };
-
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {} else {}
-        });
-        //End Nodemailer
     });
 
     // Deleting Events
@@ -149,13 +125,12 @@ module.exports = function (app, passport) {
                     };
                     res.end(JSON.stringify(output));
 
-                    //Start Nodemailer: Email for Event DELETED
+                    //nodemailer
                     let email = require('./nodemailerTemplates/deletedEvent');
                     let mailOptions = email.deletedEvent(req);
                     transporter.sendMail(mailOptions, (error, info) => {
                         if (error) {} else {}
                     });
-                    //End Nodemailer
                 });
         });
     });
@@ -183,13 +158,12 @@ module.exports = function (app, passport) {
                                 };
                                 res.end(JSON.stringify(output));
 
-                                //Start Nodemailer: Email for Event JOINED
+                                //nodemailer
                                 let email = require('./nodemailerTemplates/joinedEvent');
                                 let mailOptions = email.joinedEvent(req);
                                 transporter.sendMail(mailOptions, (error, info) => {
                                     if (error) {} else {}
                                 });
-                                //End Nodemailer
                             }
                         )
                     }
@@ -263,13 +237,12 @@ module.exports = function (app, passport) {
                             };
                             res.end(JSON.stringify(output));
 
-                            //Start Nodemailer: Email for LEAVING Event
+                            //nodemailer
                             let email = require('./nodemailerTemplates/leftEvent');
                             let mailOptions = email.leftEvent(req);
                             transporter.sendMail(mailOptions, (error, info) => {
                                 if (error) {} else {}
                             });
-                            //End Nodemailer
                         }
                     )
                     if (err) throw err;

@@ -1,4 +1,4 @@
-exports.leftEvent = function (request){
+exports.leftEvent = function(request){
     const userEmail = request.session.passport.user._json.email;
     const userName = request.session.passport.user._json.first_name;
     const mailOptions = {
