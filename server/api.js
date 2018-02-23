@@ -83,27 +83,19 @@ module.exports = function (app, passport) {
                 sql,
                 function (err, results, fields) {
                     if (err) throw err;
-                    else {
-                        let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
-                        let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', results.insertId];
-                        sql = mysql.format(sql, inserts);
-                        connection.query(
-                            sql,
-                            function (err, results) {
-                                const output = {
-                                    success: true,
-                                    data: results
-                                };
-                                res.end(JSON.stringify(output));
-                            }
-                        )
-
-                    }
-                    const output = {
-                        success: true,
-                        data: results
-                    };
-                    res.end(JSON.stringify(output));
+                    let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
+                    let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', results.insertId];
+                    sql = mysql.format(sql, inserts);
+                    connection.query(
+                        sql,
+                        function (err, results) {
+                            const output = {
+                                success: true,
+                                data: results
+                            };
+                            res.end(JSON.stringify(output));
+                        }
+                    )
                 });
         });
 
@@ -195,6 +187,7 @@ module.exports = function (app, passport) {
             connection.query(
                 sql,
                 function (err, results) {
+                    console.log(results);
                     function insertUserIntoEvent() {
                         let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
                         let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', req.body.event_id];
@@ -207,19 +200,19 @@ module.exports = function (app, passport) {
                                     data: results
                                 };
                                 res.end(JSON.stringify(output));
+                                //Start Nodemailer: Email for Event JOINED
+                                let email = require('./nodemailerTemplates/joinedEvent');
+                                let mailOptions = email.joinedEvent(req);
+                                transporter.sendMail(mailOptions, (error, info) => {
+                                    if (error) {} else {}
+                                });
+                                //End Nodemailer
                             }
                         )
                     }
                     if (err) throw err;
                     if (results.length == 0) {
                         insertUserIntoEvent();
-                        //Start Nodemailer: Email for Event JOINED
-                        let email = require('./nodemailerTemplates/joinedEvent');
-                        let mailOptions = email.joinedEvent(req);
-                        transporter.sendMail(mailOptions, (error, info) => {
-                            if (error) {} else {}
-                        });
-                        //End Nodemailer
                     } else if (results.length !== 0 && results.length < req.body.max - 1) {
                         let sql = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
                         let inserts = ['joined_events', 'event_id', req.body.event_id, 'facebookId', req.session.passport.user.id];
@@ -286,16 +279,16 @@ module.exports = function (app, passport) {
                                 data: results
                             };
                             res.end(JSON.stringify(output));
+                            //Start Nodemailer: Email for LEAVING Event
+                            let email = require('./nodemailerTemplates/leftEvent');
+                            let mailOptions = email.leftEvent(req);
+                            transporter.sendMail(mailOptions, (error, info) => {
+                                if (error) {} else {}
+                            });
+                            //End Nodemailer
                         }
                     )
                     if (err) throw err;
-                    //Start Nodemailer: Email for LEAVING Event
-                    let email = require('./nodemailerTemplates/leftEvent');
-                    let mailOptions = email.leftEvent(req);
-                    transporter.sendMail(mailOptions, (error, info) => {
-                        if (error) {} else {}
-                    });
-                    //End Nodemailer
                 }
             )
         });
