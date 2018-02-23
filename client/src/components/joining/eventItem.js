@@ -13,7 +13,7 @@ class EventDetails extends Component {
 
         this.state = {
             showModalDetails: false,
-            info: this.props.info,
+            // info: this.props.info,
             modalMessageConfirm: null,
             showModalConf: false,
             isLoggedIn: false
@@ -30,7 +30,7 @@ class EventDetails extends Component {
 
     /////////////////////////MAP////////////////////////
     renderMapAfterClick(){
-        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.props.info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
 
@@ -75,16 +75,16 @@ class EventDetails extends Component {
     }
 
     convertDate() {
-        var date = this.state.info.date;
-        var time = this.state.info.time;
+        var date = this.props.info.date;
+        var time = this.props.info.time;
         var convert = new Date(`${date} " " ${ time}`);
         var newDate = convert.toLocaleDateString();
         return newDate;
     }
 
     convertTime() {
-        var date = this.state.info.date;
-        var time = this.state.info.time;
+        var date = this.props.info.date;
+        var time = this.props.info.time;
         var d = new Date(`${date} " " ${ time}`);
         var hr24 = d.getHours();
         var min = d.getMinutes();
@@ -108,7 +108,7 @@ class EventDetails extends Component {
 
     userJoinEvent() {
         const self = this;
-        this.props.userJoin(this.state.info).then(function(response){
+        this.props.userJoin(this.props.info).then(function(response){
             if (response.payload.data === 'duplicate') {
                 self.toggleModalConf("error1");
             } else if (response.payload.data === 'max') {
