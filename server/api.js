@@ -132,17 +132,15 @@ module.exports = function (app, passport) {
     // Joining Events
     app.post('/join_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "SELECT * FROM ?? WHERE ?? = ?";
-        let inserts = ['joined_events', 'event_id', req.body.event_id];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.getJoinedEvents(req);
         connection.connect(() => {
             connection.query(
                 sql,
                 function (err, results) {
                     function insertUserIntoEvent() {
-                        let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
-                        let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', req.body.event_id];
-                        sql = mysql.format(sql, inserts);
+                        let sql = require('./config/sql');
+                        sql = sql.addUserToEvent(req);
                         connection.query(
                             sql,
                             function (err, results) {
@@ -165,9 +163,8 @@ module.exports = function (app, passport) {
                     if (results.length == 0) {
                         insertUserIntoEvent();
                     } else if (results.length !== 0 && results.length < req.body.max - 1) {
-                        let sql = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
-                        let inserts = ['joined_events', 'event_id', req.body.event_id, 'facebookId', req.session.passport.user.id];
-                        sql = mysql.format(sql, inserts);
+                        let sql = require('./config/sql');
+                        sql = sql.checkIfUserInEvent(req);
                         connection.query(
                             sql,
                             function (err, results) {
