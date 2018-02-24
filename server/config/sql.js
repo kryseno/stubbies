@@ -39,7 +39,7 @@ exports.addCreatorToEvent = function(request){
 }
 
 /*************************************/
-/*           User Profile            */
+/*         Events User Joined        */
 /*************************************/
 exports.getUserEventsJoined = function(request){
     let sql = "SELECT ??, ??, ??, ?? AS ?? FROM ?? INNER JOIN ?? on ?? = ?? INNER JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? != ? AND ?? = ?";
@@ -48,9 +48,22 @@ exports.getUserEventsJoined = function(request){
     return sql
 }
 
+/*************************************/
+/*        Events User Created        */
+/*************************************/
 exports.getUserEventsCreated = function(request){
     let sql = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? = ?";
     let inserts = ['events.*', 'events_subjects.subject', 'e_s_subj', 'events', 'events_subjects', 'events.subject', 'events_subjects.id', 'isActive', 1, 'facebookID', request.session.passport.user.id];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
+/*************************************/
+/*         Soft Delete Event         */
+/*************************************/
+exports.deleteEvent = function(request){
+    let sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+    let inserts = ['events', 'isActive', 0, 'event_id', request.body.event_id];
     sql = mysql.format(sql, inserts);
     return sql
 }

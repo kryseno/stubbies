@@ -106,9 +106,8 @@ module.exports = function (app, passport) {
     // Deleting Events
     app.post('/delete_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
-        let inserts = ['events', 'isActive', 0, 'event_id', req.body.event_id];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.deleteEvent(req);
         connection.connect(() => {
             connection.query(
                 sql,
