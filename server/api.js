@@ -72,17 +72,15 @@ module.exports = function (app, passport) {
     // Adding Events
     app.post('/add_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?";
-        let inserts = ['events', 'title', req.body.title, 'description', req.body.description, 'subject', req.body.subject, 'date', req.body.date, 'time', req.body.time, 'duration', req.body.duration, 'location', req.body.location, 'max', req.body.max, 'phone', req.body.phone, 'email', req.body.email, 'coordinates', req.body.coordinates, 'facebookID', req.session.passport.user.id, 'isActive', 1];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.addEvent(req);
         connection.connect(() => {
             connection.query(
                 sql,
                 function (err, results, fields) {
                     if (err) throw err;
-                    let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
-                    let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', results.insertId];
-                    sql = mysql.format(sql, inserts);
+                    let sql = require('./config/sql');
+                    sql = sql.addCreatorToEvent(req);
                     connection.query(
                         sql,
                         function (err, results) {
