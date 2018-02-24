@@ -31,7 +31,7 @@ exports.addEvent = function(request){
 /*****************************************************/
 /*             Add Event Creator to Event            */
 /*****************************************************/
-exports.addCreatorToEvent = function(request){
+exports.addCreatorToEvent = function(request, results){
     let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
     let inserts = ['joined_events', 'facebookID', request.session.passport.user.id, 'event_id', results.insertId];
     sql = mysql.format(sql, inserts);

@@ -80,7 +80,7 @@ module.exports = function (app, passport) {
                 function (err, results, fields) {
                     if (err) throw err;
                     let sql = require('./config/sql');
-                    sql = sql.addCreatorToEvent(req);
+                    sql = sql.addCreatorToEvent(req, results);
                     connection.query(
                         sql,
                         function (err, results) {
