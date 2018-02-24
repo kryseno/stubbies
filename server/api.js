@@ -53,9 +53,8 @@ module.exports = function (app, passport) {
     // Grabbing User Events
     app.get('/user_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? = ?";
-        let inserts = ['events.*', 'events_subjects.subject', 'e_s_subj', 'events', 'events_subjects', 'events.subject', 'events_subjects.id', 'isActive', 1, 'facebookID', req.session.passport.user.id];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.getUserEventsCreated(req);
         connection.connect(() => {
             connection.query(
                 sql,
@@ -194,9 +193,8 @@ module.exports = function (app, passport) {
     //Display events user joined
     app.get('/user_joined_events', function (req, res) {
             const connection = mysql.createConnection(credentials);
-            let sql = "SELECT ??, ??, ??, ?? AS ?? FROM ?? INNER JOIN ?? on ?? = ?? INNER JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? != ? AND ?? = ?";
-            let inserts = ['joined_events.*', 'events.*', 'events_subjects.id', 'events_subjects.subject', 'e_s_subj', 'events', 'joined_events', 'joined_events.event_id', 'events.event_id', 'events_subjects', 'events_subjects.id', 'events.subject', 'joined_events.facebookID', req.session.passport.user.id, 'events.facebookID', req.session.passport.user.id, 'isActive', 1]
-            sql = mysql.format(sql, inserts);
+            let sql = require('./config/sql');
+            sql = sql.getUserEventsJoined(req);
             connection.connect(() => {
                 connection.query(
                     sql,
