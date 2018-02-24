@@ -6,7 +6,7 @@ const pool = mysql.createPool(credentials);
 
 module.exports = function(passport){
     passport.use(new FacebookStrategy(facebookCreds,
-        function (accessToken, refreshToken, profile, cb) {
+        function (accessToken, refreshToken, profile, callback) {
             let sql = "SELECT * FROM ?? WHERE ?? = ?";
             let inserts = ['users', 'facebookID', profile.id];
             sql = mysql.format(sql, inserts);
@@ -15,7 +15,6 @@ module.exports = function(passport){
                 if (err) throw err;
     
                 if (results.length === 0) {
-                    console.log('these are the results from passport strat:', results);
                     let { id, emails: [{value: emailVal}], name: { givenName , familyName}, photos: [{value: photoVal}] } = profile;
                     let isLoggedIn = 1;
                     let sql = "INSERT INTO ??(??, ??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?, ?)";
@@ -28,14 +27,14 @@ module.exports = function(passport){
                     });
                 }
             });
-            return cb(null, profile);
+            return callback(null, profile);
         }));
     
-    passport.serializeUser(function(user, cb) {
-        cb(null, user);
+    passport.serializeUser(function(user, callback) {
+        callback(null, user);
     });
     
-    passport.deserializeUser(function(obj, cb) {
-        cb(null, obj);
+    passport.deserializeUser(function(obj, callback) {
+        callback(null, obj);
     });
 }

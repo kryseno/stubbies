@@ -3,6 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 //CORS
@@ -40,6 +41,6 @@ app.get('*', function(req, res) {
 });
 
 // Listen
-app.listen(4000,function(){
-    console.log('the server is started on Port 4000');
+app.listen(PORT, function(){
+    console.log(`the server is listening on port ${PORT}`);
 });

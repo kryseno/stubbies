@@ -6,31 +6,20 @@ class DetailsModal extends Component {
     constructor (props) {
         super(props);
 
-        this.state = {
-            showModal: this.props.showModal,
-            details: this.props.details
-        }
-
         this.toggleModal = this.props.toggleModal; /*passed by prop*/
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({
-            showModal: nextProps.showModal
-        })
-    }
-
     convertDate() {
-        var date = this.state.details.date;
-        var time = this.state.details.time;
+        var date = this.props.details.date;
+        var time = this.props.details.time;
         var convert = new Date(`${date} " " ${ time}`);
         var newDate = convert.toLocaleDateString();
         return newDate;
     }
 
     convertTime() {
-        var date = this.state.details.date;
-        var time = this.state.details.time;
+        var date = this.props.details.date;
+        var time = this.props.details.time;
         var d = new Date(`${date} " " ${ time}`);
         var hr24 = d.getHours();
         var min = d.getMinutes();
@@ -53,11 +42,11 @@ class DetailsModal extends Component {
     }
 
     render() { 
-        const {showModal, details} = this.state;
+        const {showModal, details} = this.props;
         if(!showModal){
             return null;
         }
-
+        
         return (
             <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog">
                 <div className="modal-dialog detailsDialog">
