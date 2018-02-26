@@ -208,16 +208,14 @@ module.exports = function (app, passport) {
     //Leaving Events from Profile Page
     app.post('/leave_event', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "SELECT * FROM ?? WHERE ?? = ?";
-        let inserts = ['joined_events', 'event_id', req.body.event_id];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.getJoinedEventsProfile(req);
         connection.connect(() => {
             connection.query(
                 sql,
                 function (err, results) {
-                    let sql = "DELETE FROM ?? WHERE ?? = ? AND ?? = ?";
-                    let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', req.body.event_id];
-                    sql = mysql.format(sql, inserts);
+                    let sql = require('./config/sql');
+                    sql = sql.removeUserFromEvent(req);
                     connection.query(
                         sql,
                         function (err, results) {

@@ -101,6 +101,23 @@ exports.getUserEventsCreated = function(request){
 }
 
 /*****************************************************/
+/*               Remove User From Event              */
+/*****************************************************/
+exports.getJoinedEventsProfile = function(request){
+    let sql = "SELECT ??, ??, ?? FROM ?? WHERE ?? = ?";
+    let inserts = ['id', 'facebookID', 'event_id', 'joined_events', 'event_id', request.body.event_id];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
+exports.removeUserFromEvent = function(request){
+    let sql = "DELETE FROM ?? WHERE ?? = ? AND ?? = ?";
+    let inserts = ['joined_events', 'facebookID', request.session.passport.user.id, 'event_id', request.body.event_id];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
+/*****************************************************/
 /*                  Soft Delete Event                */
 /*****************************************************/
 exports.deleteEvent = function(request){
