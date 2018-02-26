@@ -48,8 +48,8 @@ exports.addUserToEvent = function(request){
 /*         Check If User Already Joined Event        */
 /*****************************************************/
 exports.checkIfUserInEvent = function(request){
-    let sql = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
-    let inserts = ['joined_events', 'event_id', request.body.event_id, 'facebookId', request.session.passport.user.id];
+    let sql = "SELECT ??, ??, ?? FROM ?? WHERE ?? = ? AND ?? = ?";
+    let inserts = ['id', 'facebookID', 'event_id', 'joined_events', 'event_id', request.body.event_id, 'facebookId', request.session.passport.user.id];
     sql = mysql.format(sql, inserts);
     return sql
 }
