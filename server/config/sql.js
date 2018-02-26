@@ -67,6 +67,16 @@ exports.addCreatorToEvent = function(request, results){
     return sql
 }
 
+/*****************************************************/
+/*                Get Subject from Table             */
+/*****************************************************/
+exports.getSubject = function(request){
+    let sql = "SELECT ?? FROM ?? WHERE ?? = ?";
+    let inserts = ['subject', 'events_subjects', 'id', request.body.subject];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
 /*************************************************************************/
 /*                           -- Profile Page --                          */
 /*************************************************************************/

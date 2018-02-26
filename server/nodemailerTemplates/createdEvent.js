@@ -1,6 +1,5 @@
-exports.createdEvent = function(request){
-    const subjArray = ["Life Sciences", "Visual and Performance Arts", "Liberal Arts", "Engineering and Technology", "Business"];
-    const nodeMailSubj = subjArray[`${request.body.subject}` - 1];
+exports.createdEvent = function(request, field){
+    const subject = field[0].subject;
     const mailOptions = {
         from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
         to: `${request.body.email}`,
@@ -16,7 +15,7 @@ exports.createdEvent = function(request){
                 <p><b>Where:</b> ${request.body.location}</p>
                 <p><b>Description:</b> ${request.body.description}</p>
                 <p><b>Duration:</b> ${request.body.duration}</p>
-                <p><b>Subject:</b> ${nodeMailSubj}</b></p>
+                <p><b>Subject:</b> ${subject}</b></p>
                 <p><b>Group Size:</b> ${request.body.max}</p>
                 <p><b>Phone Provided:</b> ${request.body.phone}</p>
                 <p><b>Email Provided:</b> ${request.body.email}</p>
