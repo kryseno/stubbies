@@ -92,11 +92,18 @@ module.exports = function (app, passport) {
                             res.end(JSON.stringify(output));
 
                             //nodemailer
-                            let email = require('./nodemailerTemplates/createdEvent');
-                            let mailOptions = email.createdEvent(req);
-                            transporter.sendMail(mailOptions, (error, info) => {
-                                if (error) {} else {}
-                            });
+                            let sql = require('./config/sql');
+                            sql = sql.getSubject(req);
+                            connection.query(
+                                sql,
+                                function(err, subject) {
+                                    let email = require('./nodemailerTemplates/createdEvent');
+                                    let mailOptions = email.createdEvent(req, subject);
+                                    transporter.sendMail(mailOptions, (error, info) => {
+                                        if (error) {} else {}
+                                    });
+                                }
+                            )
                         }
                     )
                 });
