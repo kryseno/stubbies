@@ -28,8 +28,8 @@ exports.getEventsLoggedOut = function(){
 /*                 Grab Joined Events                */
 /*****************************************************/
 exports.getJoinedEvents = function(request){
-    let sql = "SELECT * FROM ?? WHERE ?? = ?";
-    let inserts = ['joined_events', 'event_id', request.body.event_id];
+    let sql = "SELECT ??, ??, ?? FROM ?? WHERE ?? = ?";
+    let inserts = ['id', 'facebookID', 'event_id', 'joined_events', 'event_id', request.body.event_id];
     sql = mysql.format(sql, inserts);
     return sql
 }
