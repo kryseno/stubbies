@@ -84,8 +84,8 @@ exports.addCreatorToEvent = function(request, results){
 /*                Events User Joined                 */
 /*****************************************************/
 exports.getUserEventsJoined = function(request){
-    let sql = "SELECT ??, ??, ??, ?? AS ?? FROM ?? INNER JOIN ?? on ?? = ?? INNER JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? != ? AND ?? = ?";
-    let inserts = ['joined_events.*', 'events.*', 'events_subjects.id', 'events_subjects.subject', 'e_s_subj', 'events', 'joined_events', 'joined_events.event_id', 'events.event_id', 'events_subjects', 'events_subjects.id', 'events.subject', 'joined_events.facebookID', request.session.passport.user.id, 'events.facebookID', request.session.passport.user.id, 'isActive', 1]
+    let sql = "SELECT ??, ??, ??, ??, ??, ??, ??, ??, ??, ??, ??, ??, ??, ??, ??, ??, ??, ??, ?? AS ?? FROM ?? INNER JOIN ?? on ?? = ?? INNER JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? != ? AND ?? = ?";
+    let inserts = ['joined_events.id', 'joined_events.facebookID', 'joined_events.event_id', 'events.event_id', 'events.title', 'events.description', 'events.subject', 'events.date', 'events.time', 'events.duration', 'events.location', 'events.max', 'events.phone', 'events.email', 'events.facebookID', 'events.coordinates', 'events.isActive', 'events_subjects.id', 'events_subjects.subject', 'e_s_subj', 'events', 'joined_events', 'joined_events.event_id', 'events.event_id', 'events_subjects', 'events_subjects.id', 'events.subject', 'joined_events.facebookID', request.session.passport.user.id, 'events.facebookID', request.session.passport.user.id, 'isActive', 1]
     sql = mysql.format(sql, inserts);
     return sql
 }
