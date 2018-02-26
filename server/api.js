@@ -214,6 +214,7 @@ module.exports = function (app, passport) {
             connection.query(
                 sql,
                 function (err, results) {
+                    if (err) throw err;
                     let sql = require('./config/sql');
                     sql = sql.removeUserFromEvent(req);
                     connection.query(
@@ -233,7 +234,6 @@ module.exports = function (app, passport) {
                             });
                         }
                     )
-                    if (err) throw err;
                 }
             )
         });
