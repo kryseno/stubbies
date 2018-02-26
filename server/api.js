@@ -209,7 +209,7 @@ module.exports = function (app, passport) {
     app.post('/leave_event', function (req, res) {
         const connection = mysql.createConnection(credentials);
         let sql = require('./config/sql');
-        sql = sql.getJoinedEventsProfile(req);
+        sql = sql.getJoinedEvents(req);
         connection.connect(() => {
             connection.query(
                 sql,

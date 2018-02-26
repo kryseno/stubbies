@@ -25,16 +25,6 @@ exports.getEventsLoggedOut = function(){
 }
 
 /*****************************************************/
-/*                 Grab Joined Events                */
-/*****************************************************/
-exports.getJoinedEvents = function(request){
-    let sql = "SELECT ??, ??, ?? FROM ?? WHERE ?? = ?";
-    let inserts = ['id', 'facebookID', 'event_id', 'joined_events', 'event_id', request.body.event_id];
-    sql = mysql.format(sql, inserts);
-    return sql
-}
-
-/*****************************************************/
 /*                  Add User to Event                */
 /*****************************************************/
 exports.addUserToEvent = function(request){
@@ -103,13 +93,6 @@ exports.getUserEventsCreated = function(request){
 /*****************************************************/
 /*               Remove User From Event              */
 /*****************************************************/
-exports.getJoinedEventsProfile = function(request){
-    let sql = "SELECT ??, ??, ?? FROM ?? WHERE ?? = ?";
-    let inserts = ['id', 'facebookID', 'event_id', 'joined_events', 'event_id', request.body.event_id];
-    sql = mysql.format(sql, inserts);
-    return sql
-}
-
 exports.removeUserFromEvent = function(request){
     let sql = "DELETE FROM ?? WHERE ?? = ? AND ?? = ?";
     let inserts = ['joined_events', 'facebookID', request.session.passport.user.id, 'event_id', request.body.event_id];
@@ -123,6 +106,19 @@ exports.removeUserFromEvent = function(request){
 exports.deleteEvent = function(request){
     let sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
     let inserts = ['events', 'isActive', 0, 'event_id', request.body.event_id];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
+/*************************************************************************/
+/*                           -- Universal Query --                          */
+/*************************************************************************/
+/*****************************************************/
+/*                 Grab Joined Events                */
+/*****************************************************/
+exports.getJoinedEvents = function(request){
+    let sql = "SELECT ??, ??, ?? FROM ?? WHERE ?? = ?";
+    let inserts = ['id', 'facebookID', 'event_id', 'joined_events', 'event_id', request.body.event_id];
     sql = mysql.format(sql, inserts);
     return sql
 }
