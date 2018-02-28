@@ -20,9 +20,8 @@ module.exports = function (app, passport) {
         function (req, res) {
             const connection = mysql.createConnection(credentials);
             if (req.session.passport !== undefined) {
-                let sql = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? AND ?? = ? WHERE ?? != ?";
-                let inserts = ['events.*', 'events_subjects.subject', 'e_s_subj', 'events', 'events_subjects', 'events.subject', 'events_subjects.id', 'events.isActive', 1, 'events.facebookID', req.session.passport.user.id];
-                sql = mysql.format(sql, inserts);
+                let sql = require('./config/sql');
+                sql = sql.getEventsLoggedIn(req);
                 connection.connect(() => {
                     connection.query(
                         sql,
@@ -35,9 +34,8 @@ module.exports = function (app, passport) {
                         });
                 });
             } else {
-                let sql = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? AND ?? = ?";
-                let inserts = ['events.*', 'events_subjects.subject', 'e_s_subj', 'events', 'events_subjects', 'events.subject', 'events_subjects.id', 'events.isActive', 1];
-                sql = mysql.format(sql, inserts);
+                let sql = require('./config/sql');
+                sql = sql.getEventsLoggedOut();
                 connection.connect(() => {
                     connection.query(
                         sql,
@@ -55,9 +53,8 @@ module.exports = function (app, passport) {
     // Grabbing User Events
     app.get('/user_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "SELECT ??, ?? AS ?? FROM ?? JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? = ?";
-        let inserts = ['events.*', 'events_subjects.subject', 'e_s_subj', 'events', 'events_subjects', 'events.subject', 'events_subjects.id', 'isActive', 1, 'facebookID', req.session.passport.user.id];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.getUserEventsCreated(req);
         connection.connect(() => {
             connection.query(
                 sql,
@@ -75,17 +72,15 @@ module.exports = function (app, passport) {
     // Adding Events
     app.post('/add_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?";
-        let inserts = ['events', 'title', req.body.title, 'description', req.body.description, 'subject', req.body.subject, 'date', req.body.date, 'time', req.body.time, 'duration', req.body.duration, 'location', req.body.location, 'max', req.body.max, 'phone', req.body.phone, 'email', req.body.email, 'coordinates', req.body.coordinates, 'facebookID', req.session.passport.user.id, 'isActive', 1];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.addEvent(req);
         connection.connect(() => {
             connection.query(
                 sql,
                 function (err, results, fields) {
                     if (err) throw err;
-                    let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
-                    let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', results.insertId];
-                    sql = mysql.format(sql, inserts);
+                    let sql = require('./config/sql');
+                    sql = sql.addCreatorToEvent(req, results);
                     connection.query(
                         sql,
                         function (err, results) {
@@ -97,11 +92,18 @@ module.exports = function (app, passport) {
                             res.end(JSON.stringify(output));
 
                             //nodemailer
-                            let email = require('./nodemailerTemplates/createdEvent');
-                            let mailOptions = email.createdEvent(req);
-                            transporter.sendMail(mailOptions, (error, info) => {
-                                if (error) {} else {}
-                            });
+                            let sql = require('./config/sql');
+                            sql = sql.getSubject(req);
+                            connection.query(
+                                sql,
+                                function(err, subject) {
+                                    let email = require('./nodemailerTemplates/createdEvent');
+                                    let mailOptions = email.createdEvent(req, subject);
+                                    transporter.sendMail(mailOptions, (error, info) => {
+                                        if (error) {} else {}
+                                    });
+                                }
+                            )
                         }
                     )
                 });
@@ -111,9 +113,8 @@ module.exports = function (app, passport) {
     // Deleting Events
     app.post('/delete_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
-        let inserts = ['events', 'isActive', 0, 'event_id', req.body.event_id];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.deleteEvent(req);
         connection.connect(() => {
             connection.query(
                 sql,
@@ -138,17 +139,15 @@ module.exports = function (app, passport) {
     // Joining Events
     app.post('/join_events', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "SELECT * FROM ?? WHERE ?? = ?";
-        let inserts = ['joined_events', 'event_id', req.body.event_id];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.getJoinedEvents(req);
         connection.connect(() => {
             connection.query(
                 sql,
                 function (err, results) {
                     function insertUserIntoEvent() {
-                        let sql = "INSERT INTO ?? SET ?? = ?, ?? = ?";
-                        let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', req.body.event_id];
-                        sql = mysql.format(sql, inserts);
+                        let sql = require('./config/sql');
+                        sql = sql.addUserToEvent(req);
                         connection.query(
                             sql,
                             function (err, results) {
@@ -171,9 +170,8 @@ module.exports = function (app, passport) {
                     if (results.length == 0) {
                         insertUserIntoEvent();
                     } else if (results.length !== 0 && results.length < req.body.max - 1) {
-                        let sql = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
-                        let inserts = ['joined_events', 'event_id', req.body.event_id, 'facebookId', req.session.passport.user.id];
-                        sql = mysql.format(sql, inserts);
+                        let sql = require('./config/sql');
+                        sql = sql.checkIfUserInEvent(req);
                         connection.query(
                             sql,
                             function (err, results) {
@@ -196,9 +194,8 @@ module.exports = function (app, passport) {
     //Display events user joined
     app.get('/user_joined_events', function (req, res) {
             const connection = mysql.createConnection(credentials);
-            let sql = "SELECT ??, ??, ??, ?? AS ?? FROM ?? INNER JOIN ?? on ?? = ?? INNER JOIN ?? on ?? = ?? WHERE ?? = ? AND ?? != ? AND ?? = ?";
-            let inserts = ['joined_events.*', 'events.*', 'events_subjects.id', 'events_subjects.subject', 'e_s_subj', 'events', 'joined_events', 'joined_events.event_id', 'events.event_id', 'events_subjects', 'events_subjects.id', 'events.subject', 'joined_events.facebookID', req.session.passport.user.id, 'events.facebookID', req.session.passport.user.id, 'isActive', 1]
-            sql = mysql.format(sql, inserts);
+            let sql = require('./config/sql');
+            sql = sql.getUserEventsJoined(req);
             connection.connect(() => {
                 connection.query(
                     sql,
@@ -218,16 +215,15 @@ module.exports = function (app, passport) {
     //Leaving Events from Profile Page
     app.post('/leave_event', function (req, res) {
         const connection = mysql.createConnection(credentials);
-        let sql = "SELECT * FROM ?? WHERE ?? = ?";
-        let inserts = ['joined_events', 'event_id', req.body.event_id];
-        sql = mysql.format(sql, inserts);
+        let sql = require('./config/sql');
+        sql = sql.getJoinedEvents(req);
         connection.connect(() => {
             connection.query(
                 sql,
                 function (err, results) {
-                    let sql = "DELETE FROM ?? WHERE ?? = ? AND ?? = ?";
-                    let inserts = ['joined_events', 'facebookID', req.session.passport.user.id, 'event_id', req.body.event_id];
-                    sql = mysql.format(sql, inserts);
+                    if (err) throw err;
+                    let sql = require('./config/sql');
+                    sql = sql.removeUserFromEvent(req);
                     connection.query(
                         sql,
                         function (err, results) {
@@ -245,7 +241,6 @@ module.exports = function (app, passport) {
                             });
                         }
                     )
-                    if (err) throw err;
                 }
             )
         });

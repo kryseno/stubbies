@@ -2,3 +2,11 @@ node_modules
 .DS_Store
 .idea
 .vscode
+npm-debug.log
+client/.idea
+client/.DS_Store
+client/node_modules
+server/config/mysqlCredentials.js
+server/config/facebookCreds.js
+server/config/nodemailerConfig.js
+server/npm-debug.log
