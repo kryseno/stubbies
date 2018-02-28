@@ -1,0 +1,162 @@
+.nav-tabs > li > a:hover {
+    border-color: #eee #eee #ddd;
+    color: 	#3b5998;
+}
+
+.nav > li > a:focus, .nav > li > a:active {
+    background-color: #d1ecf7;
+    color: #428bca;
+}
+
+.navbar {
+    width: 100%;
+    margin: 0;
+}
+
+.leftNav li, .rightNav li {
+    padding: 5% 0 0 3%;
+}
+
+.rightNav {
+    padding: 0 0 0 8%;
+}
+
+.headerName {
+    letter-spacing: 7px;
+    margin: 0 3%;
+}
+
+.navbar-header {
+    width: 35%;
+}
+
+.facebookLogin {
+    list-style-type: none;
+    margin: 0;
+}
+
+.nav > li:last-child a {
+    padding-top: 13px;
+}
+
+.navNarrow {
+    display: none;
+}
+
+/* app name - randomness */
+.letter{
+    display: inline-block;
+    font-weight: 900;
+    font-size: 215%;
+    margin: 0.2em;
+    position: relative;
+    color: rgb(109, 194, 240);
+    transform-style: preserve-3d;
+    perspective: 400px;
+    z-index: 1;
+}
+
+.letter:before, .letter:after {
+    position: absolute;
+    content: attr(data-letter);
+    transform-origin: top left;
+    top: 0;
+    left: 0;
+}
+
+/* .letter, .letter:before, .letter:after {
+    transition: all 0.2s ease-in-out;
+}
+
+.letter:before {
+    color: white;
+    text-shadow: -1px 0px 1px rgba(255,255,255,.8), 1px 0px 1px rgba(0,0,0,.8);
+    z-index: 3;
+    transform: rotateX(0deg) rotateY(-15deg) rotateZ(0deg);
+}
+
+.letter:after {
+    color: rgba(0,0,0,.11);
+    z-index:2;
+    transform: scale(1.08,1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg,1deg);
+} */
+
+.letter:before { /*hover */
+    color: whitesmoke;
+    transform: rotateX(0deg) rotateY(-40deg) rotateZ(0deg);
+    text-shadow: -1px 0px 1px rgba(218, 201, 201, 0.1), 1px 0px 1px rgba(0,0,0,.1); /* delete if using hover */
+    z-index: 3; /* delete if using hover */
+}
+
+.letter:after { /* hover */
+    transform: scale(1.08,1) rotateX(0deg) rotateY(40deg) rotateZ(0deg) skew(0deg,22deg);
+    color: rgba(0,0,0,.11); /* delete if using hover */
+    z-index: 2; /* delete if using hover */
+}
+
+.navbar-right {
+    margin: 1% 0 0 0;
+}
+
+.nav > li a {
+    padding: 10px 20px;
+    background-color: #428bca; /* #3b5998 */
+    color: #f7f7f7;
+}
+
+@media (max-width: 768px) {
+    .letter {
+        font-size: 249%;
+        margin: 0;
+    }
+
+    .navbar-header {
+        width: auto;
+    }
+
+    .navWide {
+        display: none;
+    }
+    
+    .navNarrow i {
+        float: left;
+        margin: 3%;
+    }
+    
+    .narrowLinks li {
+        display: block;
+        float: left;
+        clear: left;
+    }
+
+    .navNarrow {
+        display: block;
+    }
+
+    .headerName {
+        margin: 0 3% 0 20%;
+    }
+
+    .otherLinks a {
+        padding-top: .2em;
+        border-radius: 3px;
+    }
+
+    .facebookLogin, .otherLinks {
+        margin-left: 4%;
+    }
+
+    .nav > .otherLinks a, .nav > .facebookLogin a {
+        background-color: inherit;
+        color: #3b5998;
+    }
+
+    .nav > li > a:focus, .nav > li > a:hover {
+        background-color: #428bca;
+        color: white;
+    }
+
+    .narrowLinks {
+        display: none;
+    }
+}

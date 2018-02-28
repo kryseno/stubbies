@@ -1,0 +1,52 @@
+.findEvent {
+    position: relative;
+    margin-top: 1%;
+    height: 0;
+    width: 0;
+    border: 1px solid black;
+    overflow: hidden;
+    overflow-y: auto;
+    display: none;
+}
+
+.filterContainer > h3{
+    text-align: center;
+}
+
+.filter > form {
+    height: 100%;
+}
+
+.formFilter > h3,.zipInput {
+    margin: 0;
+}
+
+.filterCheck {
+    padding-left: 5%;
+}
+
+.list > h3 {
+    text-align: center;
+}
+
+.map {
+    /* border: 1px solid black; */
+    margin-top: 1%;
+    height: 50vmin;
+}
+
+.joinMap {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #428bca;
+}
+
+.form-group {
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .infoButton {
+        margin: 0 2%;
+    }
+}
