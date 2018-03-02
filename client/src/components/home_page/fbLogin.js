@@ -20,7 +20,6 @@ class FacebookLogin extends Component {
     renderLogin() {
 
         this.props.userAuth().then((resp) => {
-            console.log('response: ', resp);
             this.setState({
                 isLoggedIn: resp.payload.data.isLoggedIn
             })
