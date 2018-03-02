@@ -160,8 +160,7 @@ class JoinEvent extends Component {
     }
 
     getJoinData() {
-        this.props.getAll().then(function(response){
-        });
+        this.props.getAll();
     }
 
     /* checkboxes */
