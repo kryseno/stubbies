@@ -2,7 +2,6 @@ const mysql = require('mysql');
 const credentials = require('./config/mysqlCredentials');
 const nodemailer = require('nodemailer');
 const { USERNAME, PASSWORD } = require('./config/nodemailerConfig.js');
-// const pool = mysql.createPool(credentials);
 
 // nodemailer
 const transporter = nodemailer.createTransport({
@@ -167,25 +166,26 @@ module.exports = function (app, passport) {
                         )
                     }
                     if (err) throw err;
-                    if (results.length == 0) {
+                    if (results.length === 0) {
                         insertUserIntoEvent();
-                    } else if (results.length !== 0 && results.length < req.body.max - 1) {
-                        let sql = require('./config/sql');
-                        sql = sql.checkIfUserInEvent(req);
-                        connection.query(
-                            sql,
-                            function (err, results) {
-                                if (results.length == 0) {
-                                    insertUserIntoEvent();
-                                } else {
-                                    res.end('duplicate');
-                                }
-                            }
-                        )
                     } else {
-                        res.end("max")
+                        if (results.length == req.body.max) {
+                            res.end('max');
+                        } else {
+                            let sql = require('./config/sql');
+                            sql = sql.checkIfUserInEvent(req);
+                            connection.query(
+                                sql,
+                                function (err, results) {
+                                    if (results.length === 0) {
+                                        insertUserIntoEvent();
+                                    } else {
+                                        res.end('duplicate');
+                                    }
+                                }
+                            )
+                        }
                     }
-
                 }
             )
         });

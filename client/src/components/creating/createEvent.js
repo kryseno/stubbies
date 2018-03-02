@@ -87,7 +87,6 @@ class CreateEvent extends Component {
     checkLogin() {
         const isLoggedIn = null;
         this.props.userAuth().then((resp) => {
-            console.log('response: ', resp);
             this.setState({
                 isLoggedIn: resp.payload.data.isLoggedIn
             })

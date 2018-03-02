@@ -25,7 +25,7 @@ class Nav extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div className="">
                 <nav className="navbar navbar-default">
                     <div className="navWide"> {/* navbar for larger device screens */}
                         <div className="navbar-header">
