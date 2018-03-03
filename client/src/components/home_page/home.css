@@ -1,6 +1,8 @@
 .container{
     background-color: white;
     opacity: .9;
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .banner {
