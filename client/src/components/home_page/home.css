@@ -81,11 +81,21 @@
     font-size: 1.5em;
 }
 
-.about p:last-of-type {
+/* .about p:last-of-type {
     font-size: 2em;
+} */
+
+@media screen and (min-width: 769px) and (max-width: 991px) {
+    .headerName {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 768px) {
+    .headerName {
+        display: none;
+    }
+
     .banner > h2 {
         background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.3, #fff)) 0 0 no-repeat;
         background-size: 100px;
@@ -114,7 +124,7 @@
         height: 115vmin;
     }
 
-    .about p, .about p:last-of-type {
+    .about p {
         font-size: 1.4em;
     }
 
@@ -138,5 +148,38 @@
         position: relative;
         border: none;
         width: auto;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .banner {
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+    
+    .banner h2 {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .banner {
+        padding: 15px 30px;
+    }
+
+    .banner img {
+        height: 90px;
+    }
+
+    .banner h2 {
+        font-size: 15px;
+    }
+
+    .about h1 {
+        font-size: 20px;
+    }
+
+    .about p {
+        font-size: 16px;
     }
 }
