@@ -77,9 +77,6 @@ class Nav extends Component {
                         </div>
                         <div className="narrowLinks">
                             <ul className="nav">
-                                <li className="facebookLogin">
-                                    <FacebookLogin />
-                                </li>
                                 <li className="otherLinks">
                                     <Link to='/'>Home</Link>
                                 </li>
@@ -91,6 +88,9 @@ class Nav extends Component {
                                 </li>
                                 <li className="otherLinks">
                                     <ProfileToggle/>
+                                </li>
+                                <li className="facebookLogin">
+                                    <FacebookLogin />
                                 </li>
                             </ul>
                         </div>
