@@ -196,7 +196,7 @@ class JoinEvent extends Component {
 
     render() {        
         return (
-            <div className="container">
+            <div>
                 <div className="filterContainer col-sm-8 col-xs-12">
                     <h3>Filter Results</h3>
                     <form onSubmit={this.zipcode}>
