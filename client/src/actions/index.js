@@ -2,7 +2,7 @@ import types from './types';
 import axios from 'axios';
 
 export function userAuth() {
-    const request = axios.get("http://stubbies.kryseno.com/checkLogin");
+    const request = axios.get("/checkLogin");
 
     return {
         type: types.USER_AUTH,
@@ -12,7 +12,7 @@ export function userAuth() {
 
 export function getAll() {
 
-    const request = axios.get("http://stubbies.kryseno.com/events");
+    const request = axios.get("/events");
 
     return {
         type: types.GET_ALL,
@@ -21,7 +21,7 @@ export function getAll() {
 }
 
 export function createEvent(form) {
-    const request = axios.post("http://stubbies.kryseno.com/add_events", {
+    const request = axios.post("/add_events", {
         title: form.values.title,
         description: form.values.description,
         subject: form.values.subject,
@@ -43,7 +43,7 @@ export function createEvent(form) {
 }
 
 export function userJoin(eventInfo) {
-    const request = axios.post("http://stubbies.kryseno.com/join_events", eventInfo);
+    const request = axios.post("/join_events", eventInfo);
 
     return {
         type: types.USER_JOIN,
@@ -52,7 +52,7 @@ export function userJoin(eventInfo) {
 }
 
 export function allCreateEvent() {
-    const request = axios.get("http://stubbies.kryseno.com/user_events");
+    const request = axios.get("/user_events");
 
     return {
         type: types.USER_CREATED_EVENTS,
@@ -61,7 +61,7 @@ export function allCreateEvent() {
 }
 
 export function allJoinEvent() {
-    const request = axios.get("http://stubbies.kryseno.com/user_joined_events");
+    const request = axios.get("/user_joined_events");
 
     return {
         type: types.USER_JOINED_EVENTS,
@@ -70,7 +70,7 @@ export function allJoinEvent() {
 }
 
 export function leaveEvent(eventInfo) {
-    const request = axios.post("http://stubbies.kryseno.com/leave_event", eventInfo);
+    const request = axios.post("/leave_event", eventInfo);
 
     return {
         type: types.LEAVE_EVENT,
@@ -79,7 +79,7 @@ export function leaveEvent(eventInfo) {
 }
 
 export function deleteEvent(eventInfo) {
-    const request = axios.post("http://stubbies.kryseno.com/delete_events", eventInfo);
+    const request = axios.post("/delete_events", eventInfo);
 
     return {
         type: types.DELETE_EVENT,

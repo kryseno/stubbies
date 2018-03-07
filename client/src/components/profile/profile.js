@@ -43,7 +43,7 @@ class Profile extends Component {
         const {firstName, lastName, contact, photo} = this.state;
 
         return (
-            <div className="container">
+            <div>
                 <div className="row">
                     <div className="col-sm-12 col-xs-12">
                         <div className="panel panel-default">

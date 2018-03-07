@@ -9,7 +9,7 @@ import Logo from '../../assets/images/logo.png';
 class Home extends Component {
     render() {
         return (
-            <div className="container">
+            <div>
                 <div className="banner col-sm-12 col-xs-12">
                     <img src={Logo}/>
                     <h2>You don't have to study lonely, with stubbies!</h2>
