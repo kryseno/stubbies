@@ -98,4 +98,12 @@
     .selectDivContainer > select {
         margin-bottom: 10px
     }
+
+    .descBox {
+        padding: 1% 7%
+    }
+
+    .mapView {
+        padding: 0 4%;
+    }
 }
