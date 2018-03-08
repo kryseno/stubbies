@@ -140,43 +140,43 @@ class CreateEvent extends Component {
         const { isLoggedIn } = this.state;
 
         return (
-            <div className="container">
+            <div>
                 <div className="form-group">
                     <form onSubmit={handleSubmit((values) => this.submitData(values))}>
-                        <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event" />
-                        <div className="col-sm-4 col-xs-12 selectDivContainer">
-                            <label htmlFor="subject">Subject</label>
-                            <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
-                                <option disabled>Select a Subject</option>
-                                <option value="1">Life Sciences</option>
-                                <option value="2">Visual and Perfomance Arts</option>
-                                <option value="3">Liberal Arts</option>
-                                <option value="4">Engineering and Technology</option>
-                                <option value="5">Business</option>
-                            </Field>
-                        </div>
-                        <div className="col-sm-4 col-xs-12 selectDivContainer">
-                            <label>Event Duration</label>
-                            <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
-                                <option disabled>Select event duration</option>
-                                <option>Less than 1 Hour</option>
-                                <option>1 - 2 Hours</option>
-                                <option>2 - 3 Hours</option>
-                                <option>3 - 4 Hours</option>
-                                <option>4 - 5 Hours</option>
-                                <option>> 5 Hours</option>
-                            </Field>
-                        </div>
+                        <div className="col-xs-12">
+                            <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event" />
+                            <div className="col-sm-4 col-xs-12 selectDivContainer">
+                                <label htmlFor="subject">Subject</label>
+                                <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
+                                    <option disabled>Select a Subject</option>
+                                    <option value="1">Life Sciences</option>
+                                    <option value="2">Visual and Perfomance Arts</option>
+                                    <option value="3">Liberal Arts</option>
+                                    <option value="4">Engineering and Technology</option>
+                                    <option value="5">Business</option>
+                                </Field>
+                            </div>
+                            <div className="col-sm-4 col-xs-12 selectDivContainer">
+                                <label>Event Duration</label>
+                                <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
+                                    <option disabled>Select event duration</option>
+                                    <option>Less than 1 Hour</option>
+                                    <option>1 - 2 Hours</option>
+                                    <option>2 - 3 Hours</option>
+                                    <option>3 - 4 Hours</option>
+                                    <option>4 - 5 Hours</option>
+                                    <option>> 5 Hours</option>
+                                </Field>
+                            </div>
                         <div>
                             <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" min={2} max={100} placeholder="Group Size" label="Max Group Size" />
                             <p className="maxSizeNote">Note: Max group size includes event creator.</p>
                         </div>
-                        <div className="col-sm-12 col-xs-12 dateTime">
-                            <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
-                            <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
                         </div>
-                        <div className="col-sm-12 col-xs-12">
-                            <div className="leftOfMap col-sm-4">
+                        <div className="col-xs-12">
+                            <div className="col-sm-4 col-xs-12 ">
+                                <Field name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
+                                <Field name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
                                 <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="e.g. xxxxxxxxxx" />
                                 <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="e.g. johndoe@gmail.com" />
                                 <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="e.g. Starbucks, Irvine or 8539 Irvine Center" />
@@ -187,15 +187,17 @@ class CreateEvent extends Component {
                                 </div>
                             </div>
                         </div>
-                        <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..." />
-                        <div className="bottons col-sm-12 col-xs-12">
-                            <button className="form-group btn btn-danger" type="button" onClick={reset}>Reset From</button>
-                            {
-                                isLoggedIn ?
-                                    <button className="form-group btn btn-success submitForm">Create Event</button>
-                                    :
-                                    <div className="form-group btn btn-primary"><FacebookLogin/></div>
-                            }
+                        <div className="descBox col-xs-12">
+                            <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..." />
+                            <div className="formBtns col-sm-12 col-xs-12">
+                                <button className="form-group btn btn-danger" type="button" onClick={reset}>Reset From</button>
+                                {
+                                    isLoggedIn ?
+                                        <button className="form-group btn btn-success submitForm">Create Event</button>
+                                        :
+                                        <div className="form-group btn btn-primary"><FacebookLogin/></div>
+                                }
+                            </div>
                         </div>
                     </form>
                     <ConfirmationModal confirmStatus={this.state.modalMessage} showModal={this.state.showModal} toggleModal={this.toggleModal} />

@@ -5,3 +5,7 @@
 .buttonContainer {
     margin: 1% 0 3% 0;
 }
+
+.btn {
+    padding: 6px 6px;
+}
