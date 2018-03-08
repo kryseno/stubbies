@@ -45,6 +45,10 @@
     margin: 0;
 }
 
+.searchForm {
+    padding: 2% 5%;
+}
+
 @media screen and (max-width: 768px) {
     .infoButton {
         margin: 0 2%;
