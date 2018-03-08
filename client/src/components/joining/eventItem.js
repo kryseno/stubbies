@@ -143,10 +143,10 @@ class EventDetails extends Component {
                     <p>{`On ${this.convertDate()} at ${this.convertTime()}`}</p>
                 </div>
                 <div className="col-sm-12 buttonContainer">
-                    <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 col-xs-6 btn btn-primary" type="button">More Info</button>
+                    <button onClick={this.renderMapAfterClick} className="col-md-4 col-md-offset-1 col-sm-6 col-sm-offset-0 col-xs-offset-1 col-xs-5 btn btn-primary" type="button">More Info</button>
                     {
                         isLoggedIn ?
-                            <button onClick={this.userJoinEvent} className="col-sm-5 col-sm-offset-1 col-xs-6 btn btn-success" type="button">Join Event</button>
+                            <button onClick={this.userJoinEvent} className="col-md-4 col-md-offset-1 col-sm-6 col-sm-offset-0 col-xs-offset-1 col-xs-5 btn btn-success" type="button">Join Event</button>
                             :
                             null
                     }               

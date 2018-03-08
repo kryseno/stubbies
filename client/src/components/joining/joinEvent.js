@@ -199,7 +199,7 @@ class JoinEvent extends Component {
             <div>
                 <div className="filterContainer col-sm-8 col-xs-12">
                     <h3>Filter Results</h3>
-                    <form onSubmit={this.zipcode}>
+                    <form className="searchForm" onSubmit={this.zipcode}>
                         <div className="form-group zipInput">
                             <h4>By Location</h4>
                             <input onBlur={this.zipcode} type="text" className="zipcode form-control" placeholder="Zip Code"/>
@@ -208,8 +208,9 @@ class JoinEvent extends Component {
                             <h4>By Subject</h4>
                             {this.createCheckboxes()}
                         </div>
+                        <button onClick={this.renderMapAfterSubmit} className="btn btn-warning" type="button">Search</button>
                     </form>
-                    <button onClick={this.renderMapAfterSubmit} className="btn btn-warning" type="button">Search</button>
+                    {/* <button onClick={this.renderMapAfterSubmit} className="btn btn-warning" type="button">Search</button> */}
 
                     <div className="map col-sm-12 col-xs-12">
                         <div className="joinMap" id="joinMap"></div>
