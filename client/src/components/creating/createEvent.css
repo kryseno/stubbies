@@ -50,7 +50,11 @@
     color: gray;
     display: inline-block;
     float: right;
-    margin-right: 7%;
+    margin-right: 2%;
+}
+
+.descBox {
+    padding: 1% 3%;
 }
 
 
