@@ -173,8 +173,8 @@ class CreateEvent extends Component {
                             <p className="maxSizeNote">Note: Max group size includes event creator.</p>
                         </div>
                         <div className="col-sm-12 col-xs-12 dateTime">
-                            <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
-                            <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
+                            <Field className="col-sm-4 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
+                            <Field className="col-sm-4 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
                         </div>
                         <div className="col-sm-12 col-xs-12">
                             <div className="leftOfMap col-sm-4">
@@ -189,7 +189,7 @@ class CreateEvent extends Component {
                             </div>
                         </div>
                         <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..." />
-                        <div className="bottons col-sm-12 col-xs-12">
+                        <div className="formBtns col-sm-12 col-xs-12">
                             <button className="form-group btn btn-danger" type="button" onClick={reset}>Reset From</button>
                             {
                                 isLoggedIn ?
