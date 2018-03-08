@@ -141,7 +141,7 @@ class CreateEvent extends Component {
         const { isLoggedIn } = this.state;
 
         return (
-            <div className="container">
+            <div>
                 <div className="form-group">
                     <form onSubmit={handleSubmit((values) => this.submitData(values))}>
                         <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event" />
