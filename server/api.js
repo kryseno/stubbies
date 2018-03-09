@@ -25,6 +25,7 @@ module.exports = function (app, passport) {
                     connection.query(
                         sql,
                         function (err, results, fields) {
+                            if (err) { next(err) };
                             const output = {
                                 success: true,
                                 data: results
@@ -39,6 +40,7 @@ module.exports = function (app, passport) {
                     connection.query(
                         sql,
                         function (err, results, fields) {
+                            if (err) { next(err) };
                             const output = {
                                 success: true,
                                 data: results
@@ -58,6 +60,7 @@ module.exports = function (app, passport) {
             connection.query(
                 sql,
                 function (err, results, fields) {
+                    if (err) { next(err) };
                     const output = {
                         success: true,
                         data: results,
@@ -77,13 +80,13 @@ module.exports = function (app, passport) {
             connection.query(
                 sql,
                 function (err, results, fields) {
-                    if (err) throw err;
+                    if (err) { next(err) };
                     let sql = require('./config/sql');
                     sql = sql.addCreatorToEvent(req, results);
                     connection.query(
                         sql,
                         function (err, results) {
-                            if (err) throw err;
+                            if (err) { next(err) };
                             const output = {
                                 success: true,
                                 data: results
@@ -96,10 +99,11 @@ module.exports = function (app, passport) {
                             connection.query(
                                 sql,
                                 function(err, subject) {
+                                    if (err) { next(err) };
                                     let email = require('./nodemailerTemplates/createdEvent');
                                     let mailOptions = email.createdEvent(req, subject);
-                                    transporter.sendMail(mailOptions, (error, info) => {
-                                        if (error) {} else {}
+                                    transporter.sendMail(mailOptions, (err, info) => {
+                                        if (err) { next(err) };
                                     });
                                 }
                             )
@@ -118,7 +122,7 @@ module.exports = function (app, passport) {
             connection.query(
                 sql,
                 function (err, results, fields) {
-                    if (err) throw err;
+                    if (err) { next(err) };
                     const output = {
                         success: true,
                         data: results
@@ -128,8 +132,8 @@ module.exports = function (app, passport) {
                     //nodemailer
                     let email = require('./nodemailerTemplates/deletedEvent');
                     let mailOptions = email.deletedEvent(req);
-                    transporter.sendMail(mailOptions, (error, info) => {
-                        if (error) {} else {}
+                    transporter.sendMail(mailOptions, (err, info) => {
+                        if (err) { next(err) };
                     });
                 });
         });
@@ -144,12 +148,14 @@ module.exports = function (app, passport) {
             connection.query(
                 sql,
                 function (err, results) {
+                    if (err) { next(err) };
                     function insertUserIntoEvent() {
                         let sql = require('./config/sql');
                         sql = sql.addUserToEvent(req);
                         connection.query(
                             sql,
                             function (err, results) {
+                                if (err) { next(err) };
                                 const output = {
                                     success: true,
                                     data: results
@@ -159,13 +165,12 @@ module.exports = function (app, passport) {
                                 //nodemailer
                                 let email = require('./nodemailerTemplates/joinedEvent');
                                 let mailOptions = email.joinedEvent(req);
-                                transporter.sendMail(mailOptions, (error, info) => {
-                                    if (error) {} else {}
+                                transporter.sendMail(mailOptions, (err, info) => {
+                                    if (err) { next(err) };
                                 });
                             }
                         )
                     }
-                    if (err) throw err;
                     if (results.length === 0) {
                         insertUserIntoEvent();
                     } else {
@@ -177,6 +182,7 @@ module.exports = function (app, passport) {
                             connection.query(
                                 sql,
                                 function (err, results) {
+                                    if (err) { next(err) };
                                     if (results.length === 0) {
                                         insertUserIntoEvent();
                                     } else {
@@ -200,6 +206,7 @@ module.exports = function (app, passport) {
                 connection.query(
                     sql,
                     function (err, results) {
+                        if (err) { next(err) };
                         const output = {
                             success: true,
                             data: results
@@ -221,12 +228,13 @@ module.exports = function (app, passport) {
             connection.query(
                 sql,
                 function (err, results) {
-                    if (err) throw err;
+                    if (err) { next(err) };
                     let sql = require('./config/sql');
                     sql = sql.removeUserFromEvent(req);
                     connection.query(
                         sql,
                         function (err, results) {
+                            if (err) { next(err) };
                             const output = {
                                 success: true,
                                 data: results
@@ -236,8 +244,8 @@ module.exports = function (app, passport) {
                             //nodemailer
                             let email = require('./nodemailerTemplates/leftEvent');
                             let mailOptions = email.leftEvent(req);
-                            transporter.sendMail(mailOptions, (error, info) => {
-                                if (error) {} else {}
+                            transporter.sendMail(mailOptions, (err, info) => {
+                                if (err) { next(err) };
                             });
                         }
                     )
