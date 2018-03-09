@@ -50,7 +50,7 @@
     font-size: 215%;
     margin: 0.2em;
     position: relative;
-    color: rgb(109, 194, 240);
+    color: rgb(110, 161, 209);
     transform-style: preserve-3d;
     perspective: 400px;
     z-index: 1;
@@ -104,7 +104,7 @@
     color: #f7f7f7;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .letter {
         font-size: 249%;
         margin: 0;
@@ -127,6 +127,12 @@
         display: block;
         float: left;
         clear: left;
+    }
+    
+    .narrowLinks ul {
+        position: absolute;
+        background-color: whitesmoke;
+        z-index: 2;
     }
 
     .navNarrow {

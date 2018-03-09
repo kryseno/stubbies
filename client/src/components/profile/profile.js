@@ -29,7 +29,6 @@ class Profile extends Component {
 
     getUserDataCreate() {
         this.props.allCreateEvent().then((resp) => {
-            console.log('response for user CREATED: ', resp);
             this.setState({
                 firstName: resp.payload.data.profile.user.name.givenName,
                 lastName: resp.payload.data.profile.user.name.familyName,
@@ -41,11 +40,10 @@ class Profile extends Component {
     }
 
     render() {
-        // console.log('PROPS FOR PROFILE:', this.props);
         const {firstName, lastName, contact, photo} = this.state;
 
         return (
-            <div className="container">
+            <div>
                 <div className="row">
                     <div className="col-sm-12 col-xs-12">
                         <div className="panel panel-default">

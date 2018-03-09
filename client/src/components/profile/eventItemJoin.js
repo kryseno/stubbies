@@ -102,7 +102,6 @@ class EventDetails extends Component {
     }
 
     render() {
-        // console.log('PROPS FOR JOIN EVENT ITEM: ', this.props);
         const {info} = this.props;
 
         return (

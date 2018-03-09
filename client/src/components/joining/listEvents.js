@@ -9,7 +9,6 @@ class EventList extends Component {
         super (props);
     }
 
-
     render() {
         if (this.props.filterValues.length > 0) {
             const arrayCheck = this.props.events;
@@ -68,8 +67,8 @@ class EventList extends Component {
                         return <EventDetails key={index} info={eventItem}/>
                     });
                     return (
-                        <div style={listDiv}>
-                            <ul style={{padding: 0}}>
+                        <div className="eventListDiv">
+                            <ul style={{ padding: 0 }}>
                                 {eventElements}
                             </ul>
                         </div>

@@ -3,6 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+const fs = require('fs'); // file writing for logging errors and login info
 const PORT = process.env.PORT || 4000;
 const app = express();
 
@@ -20,7 +21,12 @@ app.use( express.json() );
 app.use(express.static(path.join(__dirname, "..", "client", "dist")));
 
 //Morgan: Logger middleware for terminal
-app.use(morgan('dev'));
+app.use(morgan('common', {
+    stream: fs.createWriteStream(path.join(__dirname, 'errorLogs', 'serverError.log'), {flags: 'r+'}),
+    skip: function(req, res){
+        return res.statusCode < 500
+    }
+}));
 
 //Session
 app.use(session({

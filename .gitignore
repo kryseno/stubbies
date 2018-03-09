@@ -10,3 +10,4 @@ server/config/mysqlCredentials.js
 server/config/facebookCreds.js
 server/config/nodemailerConfig.js
 server/npm-debug.log
+server/node_modules
