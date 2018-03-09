@@ -22,6 +22,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use( express.json() );
 app.use(express.static(path.join(__dirname, "..", "client", "dist")));
 
+//Morgan: error logger middleware
+app.use(morgan(morgan_common, {
+    stream: fs.createWriteStream(path.join(__dirname, 'errorLogs', 'serverError.log'), {flags: 'r+'}),
+    skip: function(req, res){
+        return res.statusCode < 400
+    }
+}));
+
 //Session
 app.use(session({
     secret: 'ssshhhh',
@@ -39,14 +47,6 @@ require('./auth')(app, passport);
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
-
-//Morgan: error logger middleware
-app.use(morgan(morgan_common, {
-    stream: fs.createWriteStream(path.join(__dirname, 'errorLogs', 'serverError.log'), {flags: 'r+'}),
-    skip: function(req, res){
-        return res.statusCode < 400
-    }
-}));
 
 // Listen
 app.listen(PORT, function(){
