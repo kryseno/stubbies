@@ -44,7 +44,7 @@ app.get('*', function(req, res) {
 app.use(morgan(morgan_common, {
     stream: fs.createWriteStream(path.join(__dirname, 'errorLogs', 'serverError.log'), {flags: 'r+'}),
     skip: function(req, res){
-        return res.statusCode < 500
+        return res.statusCode < 400
     }
 }));
 
