@@ -3,6 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+const morgan_common = ":remote-addr - :remote-user [:date[web]] ':method :url HTTP/:http-version' :status :res[content-length]";
 const fs = require('fs');
 
 const PORT = process.env.PORT || 4000;
@@ -21,8 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use( express.json() );
 app.use(express.static(path.join(__dirname, "..", "client", "dist")));
 
-//Morgan: Logger middleware for terminal
-app.use(morgan('common', {
+//Morgan: error logger middleware
+app.use(morgan(morgan_common, {
     stream: fs.createWriteStream(path.join(__dirname, 'errorLogs', 'serverError.log'), {flags: 'r+'}),
     skip: function(req, res){
         return res.statusCode < 500
