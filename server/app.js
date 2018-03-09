@@ -3,7 +3,8 @@ const path = require('path');
 const morgan = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
-const fs = require('fs'); // file writing for logging errors and login info
+const fs = require('fs');
+
 const PORT = process.env.PORT || 4000;
 const app = express();
 
