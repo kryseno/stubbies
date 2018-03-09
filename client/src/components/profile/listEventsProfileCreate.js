@@ -2,10 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import EventDetails from './eventItemCreate';
 
-const listDiv = {
-    overflowY: 'auto',
-    height: '77vmin',
-}
+import './listEventsProfile.css'
 
 class EventList extends Component {
     constructor (props) {
@@ -21,7 +18,7 @@ class EventList extends Component {
                 return <EventDetails key={index} info={eventItem}/>
             });
             return (
-                <div style={listDiv}>
+                <div className="listEventsCreated">
                     <ul style={{padding: 0}}>
                         {eventElements}
                     </ul>

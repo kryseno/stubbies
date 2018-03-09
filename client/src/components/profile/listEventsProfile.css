@@ -1,0 +1,16 @@
+.listEventsCreated {
+    overflow: auto;
+    height: 77vmin;
+}
+
+.listEventsJoined {
+    overflow: auto;
+    height: 77vmin;
+}
+
+@media screen and (max-width: 768px) {
+    .listEventsCreated,
+    .listEventsJoined {
+        height: auto;
+    }
+}

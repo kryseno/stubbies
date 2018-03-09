@@ -35,7 +35,6 @@
 }
 
 .map {
-    /* border: 1px solid black; */
     margin-top: 1%;
     height: 50vmin;
 }
@@ -43,7 +42,6 @@
 .joinMap {
     height: 100%;
     width: 100%;
-    border: 1px solid #428bca;
 }
 
 .form-group {
