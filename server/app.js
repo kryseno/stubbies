@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "..", "client", "dist")));
 
 //Morgan: error logger middleware
 app.use(morgan(morgan_common, {
-    stream: fs.createWriteStream(path.join('/home', 'ubuntu', 'serverError.log'), {flags: 'r+'}),
+    stream: fs.createWriteStream(path.join(__dirname, 'errorLogs', 'serverError.log'), {flags: 'r+'}),
     skip: function(req, res){
         return res.statusCode < 400
     }
