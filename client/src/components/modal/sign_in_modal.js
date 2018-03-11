@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FacebookLogin from '../home_page/fbLogin';
+import { Link } from 'react-router-dom';
 
 import './sign_in.css';
 
@@ -39,7 +40,11 @@ class SignInModal extends Component {
                             <FacebookLogin/>  
                         </div>
                         <div className="modal-footer col-sm-12 col-xs-12">
-                            <button type="button" className="btn btn-default col-sm-12 col-xs-12" onClick={this.toggleSignInModal}>Close</button>
+                            <Link to='/'>
+                                <button type="button" className="btn btn-default col-sm-12 col-xs-12" onClick={this.toggleSignInModal}>
+                                    Close
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

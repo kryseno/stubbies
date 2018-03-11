@@ -25,7 +25,7 @@ class ConfirmationModalJoin extends Component {
                 status.joinStatus = "You have joined this event! A confirmation email will be sent within the hour. You can check the event you joined in your profile.",
                 status.statusHeader = "Success"
         } else if (confirmStatus === "error1") {
-                status.joinStatus = "Cannot join: You are already registered in this event. Check your Profile to view your Joined Events.",
+            status.joinStatus = "Cannot join: You are already registered in this event. Check your profile to view your Joined Events.",
                 status.statusHeader = "Error"
         } else if (confirmStatus === "error2") {
                 status.joinStatus = "Cannot join this event: The group size has reached its max.",

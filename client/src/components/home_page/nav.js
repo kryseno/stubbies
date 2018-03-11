@@ -46,13 +46,13 @@ class Nav extends Component {
                                     <Link to='/'>Home</Link>
                                 </li>
                                 <li>
+                                    <ProfileToggle />
+                                </li>
+                                <li>
                                     <Link to='/join-event'>Join Event</Link>
                                 </li>
                                 <li>
                                     <Link to='/create-event'>Create Event</Link>
-                                </li>
-                                <li>
-                                    <ProfileToggle/>
                                 </li>
                                 <li className="facebookLogin">
                                     <FacebookLogin />
@@ -81,13 +81,13 @@ class Nav extends Component {
                                     <Link to='/'>Home</Link>
                                 </li>
                                 <li className="otherLinks">
+                                    <ProfileToggle />
+                                </li>
+                                <li className="otherLinks">
                                     <Link to='/join-event'>Join</Link>
                                 </li>
                                 <li className="otherLinks">
                                     <Link to='/create-event'>Create</Link>
-                                </li>
-                                <li className="otherLinks">
-                                    <ProfileToggle/>
                                 </li>
                                 <li className="facebookLogin">
                                     <FacebookLogin />

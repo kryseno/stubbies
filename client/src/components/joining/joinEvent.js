@@ -202,7 +202,7 @@ class JoinEvent extends Component {
                     <form className="searchForm" onSubmit={this.zipcode}>
                         <div className="form-group zipInput">
                             <h4>By Location</h4>
-                            <input onBlur={this.zipcode} type="text" className="zipcode form-control" placeholder="Zip Code"/>
+                            <input onBlur={this.zipcode} type="text" className="zipcode form-control" placeholder="Address, City, Zip or Landmark"/>
                         </div>
                         <div>
                             <h4>By Subject</h4>
