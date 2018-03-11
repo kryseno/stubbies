@@ -189,7 +189,7 @@ class CreateEvent extends Component {
                             </div>
                         </div>
                         <div className="descBox col-xs-12">
-                            <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..." />
+                            <Field className="form-control descTextBox" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..." />
                             <div className="formBtns col-sm-12 col-xs-12">
                                 <button className="form-group btn btn-danger" type="button" onClick={reset}>Reset From</button>
                                 {
