@@ -26,7 +26,7 @@ class ConfirmationModalCreate extends Component {
             return (
                 <div className={`modal confirmModal ${showModal ? '' : ' hidden'}`} role="dialog">
                     <div className="modal-dialog confirmDialog">
-                        <div className="modal-content confirmContent">
+                        <div className="modal-content confirmContent confirmSuccess">
                             <div className="modal-header">
                                 <button onClick={this.toggleModal} type="button" className="close">&times;</button>
                                 <h4 className="modal-title">Success</h4>
