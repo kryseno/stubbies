@@ -25,12 +25,12 @@ app.use(express.static(path.join(__dirname, "..", "client", "dist")));
 //Morgan: error logger middleware
 app.use(morgan('dev'));
 
-app.use(morgan(morgan_common, {
-    stream: fs.createWriteStream(path.join(__dirname, 'errorLogs', 'serverError.log'), {flags: 'r+'}),
-    skip: function(req, res){
-        return res.statusCode < 400
-    }
-}));
+// app.use(morgan(morgan_common, {
+//     stream: fs.createWriteStream(path.join(__dirname, 'errorLogs', 'serverError.log'), {flags: 'r+'}),
+//     skip: function(req, res){
+//         return res.statusCode < 400
+//     }
+// }));
 
 //Session
 app.use(session({
