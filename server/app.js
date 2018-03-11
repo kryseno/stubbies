@@ -23,6 +23,8 @@ app.use( express.json() );
 app.use(express.static(path.join(__dirname, "..", "client", "dist")));
 
 //Morgan: error logger middleware
+app.use(morgan('dev'));
+
 app.use(morgan(morgan_common, {
     stream: fs.createWriteStream(path.join(__dirname, 'errorLogs', 'serverError.log'), {flags: 'r+'}),
     skip: function(req, res){
@@ -48,16 +50,16 @@ app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
-app.use('*', function(err, req, res, next){
-    console.log('There was an error');
-        let errorData= {Date: new Date().toLocaleString(),errorMessage: err.stack};
-        fs.appendFile(path.join(__dirname, 'errorLogs', 'serverError.log'), JSON.stringify(errorData) + '\n', function (err) {
-            if (err) next(err); 
-            console.log('Updated!');
-         });
-        res.status(500).render('error', { error: err });
-        next(err);
-});
+// app.use('*', function(err, req, res, next){
+//     console.log('There was an error');
+//         let errorData= {Date: new Date().toLocaleString(),errorMessage: err.stack};
+//         fs.appendFile(path.join(__dirname, 'errorLogs', 'serverError.log'), JSON.stringify(errorData) + '\n', function (err) {
+//             if (err) next(err); 
+//             console.log('Updated!');
+//          });
+//         res.status(500).render('error', { error: err });
+//         next(err);
+// });
 
 // Listen
 app.listen(PORT, function(){
