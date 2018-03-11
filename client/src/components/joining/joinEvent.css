@@ -13,6 +13,10 @@
     text-align: center;
 }
 
+.filterContainer {
+    padding-bottom: 2%;
+}
+
 .filter > form {
     height: 100%;
 }
@@ -54,6 +58,6 @@
         margin: 0 2%;
     }
     .list {
-        padding-bottom: 5%;
+        padding-bottom: 2%;
     }
 }
