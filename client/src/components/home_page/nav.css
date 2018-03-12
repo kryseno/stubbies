@@ -24,10 +24,11 @@
 .headerName {
     letter-spacing: 7px;
     margin: 0 3%;
+    padding-left: 5%;
 }
 
 .navbar-header {
-    width: 35%;
+    width: 40%;
 }
 
 .facebookLogin {
