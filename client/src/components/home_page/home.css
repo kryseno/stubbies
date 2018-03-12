@@ -8,10 +8,10 @@
 .banner {
     margin: 0;
     text-align: center;
-    background-image: url('../../assets/images/open_book.png');
-    background-size: contain;
-    background-position: 50% 50%;
-    padding: 25px 30px;
+    /* background-image: url('../../assets/images/open_book.png'); */
+    /* background-size: contain; */
+    /* background-position: 50% 50%; */
+    /* padding: 25px 30px; */
     opacity: 1;
 }
 
@@ -76,7 +76,8 @@
 
 .about {
     background-color: lightgrey;
-    height: 58vmin;
+    height: 75vmin;
+    padding-left: 5%;
 }
 
 .about p {
