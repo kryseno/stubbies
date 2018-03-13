@@ -41,6 +41,7 @@ class EventDetails extends Component {
     singleMap() {
         const uluru = this.state.coordinates;
         const map = new google.maps.Map(document.getElementById('singleMap'), {
+            clickableIcons: false,
             zoom: 14,
             center: uluru
         });

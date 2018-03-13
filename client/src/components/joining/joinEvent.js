@@ -82,6 +82,7 @@ class JoinEvent extends Component {
         this.props.getAll().then((response) => {
             if(this.state.filterValues.length < 1) {
                 const map = new google.maps.Map(document.getElementById('joinMap'), {
+                    clickableIcons: false,
                     zoom: 10,
                     center: this.state.coords
                 });
@@ -126,6 +127,7 @@ class JoinEvent extends Component {
         this.props.getAll().then((response) => {
 
             const map = new google.maps.Map(document.getElementById('joinMap'), {
+                clickableIcons: false,
                 zoom: 3,
                 center: {lat: 37.09024, lng: -95.712891}
             });
