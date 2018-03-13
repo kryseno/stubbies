@@ -3,7 +3,7 @@ const credentials = require("../config/mysqlCredentials");
 const nodemailer = require("nodemailer");
 const { USERNAME, PASSWORD } = require("../config/nodemailerConfig.js");
 
-// nodemailer
+//nodemailer
 const transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smtp.gmail.com",

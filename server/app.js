@@ -41,7 +41,7 @@ app.use(passport.session());
 require('./config/passport')(passport);
 require('./routes/join')(app, passport);
 require('./routes/create')(app, passport);
-require('./api')(app, passport);
+require('./routes/profile')(app, passport);
 require('./auth')(app, passport);
 
 app.get('*', function(req, res) {
