@@ -34,6 +34,7 @@ class EventList extends Component {
 
                 if (acceptedValues.length > 0) {
                     const map = new google.maps.Map(document.getElementById('joinMap'), {
+                        clickableIcons: false,
                         zoom: 10,
                         center: this.props.zipcodeCoords
                     });

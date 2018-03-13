@@ -32,7 +32,9 @@ class SignInModal extends Component {
                 <div className="modal-dialog signinDialog">
                     <div className="modal-content signinContent">
                         <div className="modal-header">
-                            <button onClick={this.toggleSignInModal} type="button" className="close">&times;</button>
+                            <Link to='/'>
+                                <button onClick={this.toggleSignInModal} type="button" className="close">&times;</button>
+                            </Link>
                             <h4 className="modal-title">Please Log In</h4>
                         </div>
                         <div className="modal-body signinBody">
