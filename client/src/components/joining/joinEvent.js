@@ -32,6 +32,8 @@ class JoinEvent extends Component {
         this.getJoinData = this.getJoinData.bind(this);
 
         this.zipcode = this.zipcode.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
         this.renderMapAfterSubmit = this.renderMapAfterSubmit.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
         this.joinMap = this.joinMap.bind(this);
@@ -43,8 +45,20 @@ class JoinEvent extends Component {
         event.preventDefault();
         const {value} = event.target;
         this.setState({
-            zipcode: value
+            zipcode: value 
         })
+    }
+    
+    handleTextChange(event){
+        this.setState({
+            zipcode: event.target.value
+        })
+    }
+
+    handleKeyPress(event) {
+        if (event.charCode == 13) {
+            this.renderMapAfterSubmit();
+        }
     }
 
     renderMapAfterSubmit(){
@@ -199,16 +213,16 @@ class JoinEvent extends Component {
             <div>
                 <div className="filterContainer col-sm-8 col-xs-12">
                     <h3>Filter Results</h3>
-                    <form className="searchForm" onSubmit={this.zipcode}>
+                    <form className="searchForm" onSubmit={this.zipcode} onKeyPress={this.handleKeyPress}>
                         <div className="form-group zipInput">
                             <h4>By Location</h4>
-                            <input onBlur={this.zipcode} type="text" className="zipcode form-control" placeholder="Zip Code"/>
+                            <input onBlur={this.zipcode} onChange={this.handleTextChange} type="text" className="zipcode form-control" placeholder="Address, City, Zip or Landmark"/>
                         </div>
                         <div>
                             <h4>By Subject</h4>
                             {this.createCheckboxes()}
                         </div>
-                        <button onClick={this.renderMapAfterSubmit} className="btn btn-warning" type="button">Search</button>
+                        <button onClick={this.renderMapAfterSubmit}  className="btn btn-warning" type="button">Search</button>
                     </form>
                     {/* <button onClick={this.renderMapAfterSubmit} className="btn btn-warning" type="button">Search</button> */}
 

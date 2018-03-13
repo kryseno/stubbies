@@ -1,4 +1,5 @@
 .background-img {
+    min-height: 100vh;
     background-image: url('../assets/images/study-bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;

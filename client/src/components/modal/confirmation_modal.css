@@ -9,6 +9,13 @@
     z-index: 1000;
 }
 
+.confirmContent {
+    min-height: 210px;
+}
+
+.confirmSuccess {
+    min-height: 240px
+}
 .confirmBody {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, .6);
     margin: auto;
@@ -18,12 +25,30 @@
 }
 
 .confirmDialog {
-    width: 80vmin;
+    /* width: 80vmin; */
     margin-top: 5%;
 }
 
 @media screen and (max-width: 768px) {
     .confirmDialog {
         margin: auto;
+    }
+    .confirmSuccess {
+        min-height: 235px
+    }
+}
+
+@media screen and (max-width: 530px ){
+        .confirmSuccess {
+            min-height: 275px
+        }
+}
+
+@media screen and (max-width: 320px){
+    .confirmContent {
+        min-height: 230px;
+    }
+    .confirmSuccess {
+        min-height: 275px
     }
 }

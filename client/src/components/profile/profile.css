@@ -1,5 +1,5 @@
 #joinDiv{
-    border-left: 1px solid #428bca;
+    border: 1px solid #428bca;
     height: 100%;
     overflow-y: hidden;
     padding-bottom: 1%;
@@ -7,7 +7,7 @@
 }
 
 #createDiv {
-    border-left: 1px solid #428bca;
+    border: 1px solid #428bca;
     height: 100%;
     overflow-y: hidden;
     padding-bottom: 1%;
@@ -18,10 +18,6 @@
     margin-bottom: 0;
 }
 
-.panel-body {
-    height: 90vmin;
-}
-
 .img-circle {
     display: flex;
     margin: auto;
@@ -29,20 +25,23 @@
 
 @media screen and (max-width: 768px) {
     #joinDiv {
-        margin-top: 30%;
+        /* margin-top: 5%; */
         height: 118%;
-        border-bottom: 1px solid #428bca;
-        border-left: none;
+        border: 1px solid #428bca;
+        /* border-left: none; */
     }
 
     #createDiv {
         margin-bottom: 5%;
         height: 118%;
-        border-bottom: 1px solid #428bca;
-        border-left: none;
+        border: 1px solid #428bca;
+        /* border-left: none; */
     }
 
     .buttonContainer {
         height: 35px;
+    }
+    .btn {
+        font-size: 9px;
     }
 }

@@ -4,7 +4,7 @@ import EventDetails from './eventItemJoin';
 
 const listDiv = {
     overflowY: 'auto',
-    height: '77vmin',
+    height: '85vmin',
 }
 
 class EventList extends Component {
