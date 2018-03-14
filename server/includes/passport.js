@@ -1,7 +1,7 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
-const facebookCreds = require('./facebookCreds.js');
+const facebookCreds = require('../config/facebookCreds.js');
 const mysql = require('mysql');
-const credentials = require('./mysqlCredentials');
+const credentials = require('../config/mysqlCredentials');
 const pool = mysql.createPool(credentials);
 
 module.exports = function(passport){
