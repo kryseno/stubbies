@@ -1,6 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+// const bodyParser = require('body-parser');
+// const cookieParser = require('cookie-parser');
 const path = require('path');
 const morgan = require('morgan');
 const session = require('express-session');
@@ -11,9 +11,9 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 
 //bodyParser
-app.use(cookieParser());
-app.use( bodyParser.json() );
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cookieParser());
+// app.use( bodyParser.json() );
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 //CORS
 app.use(function(req, res, next) {
