@@ -48,6 +48,10 @@ app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
+app.use((err, req, res, next) => {
+    res.status(500).send('Something is not right!');
+  })
+
 // Listen
 app.listen(PORT, function(){
     console.log(`the server is listening on port ${PORT}`);
