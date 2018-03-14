@@ -1,6 +1,4 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
 const path = require('path');
 const morgan = require('morgan');
 const session = require('express-session');
@@ -9,11 +7,6 @@ const morgan_common = ":remote-addr - :remote-user [:date[web]] ':method :url HT
 
 const PORT = process.env.PORT || 4000;
 const app = express();
-
-//bodyParser
-// app.use(cookieParser());
-// app.use( bodyParser.json() );
-// app.use(bodyParser.urlencoded({ extended: true }));
 
 //CORS
 app.use(function(req, res, next) {
@@ -46,10 +39,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/passport')(passport);
-// require('./routes/join')(app, passport);
-// require('./routes/create')(app, passport);
-// require('./routes/profile')(app, passport);
-require('./api')(app, passport);
+require('./routes/join')(app, passport);
+require('./routes/create')(app, passport);
+require('./routes/profile')(app, passport);
+// require('./api')(app, passport);
 require('./auth')(app, passport);
 
 app.get('*', function(req, res) {

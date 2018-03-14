@@ -74,7 +74,7 @@ module.exports = function(app, passport) {
             let email = require("./nodemailerTemplates/joinedEvent");
             let mailOptions = email.joinedEvent(req);
             transporter.sendMail(mailOptions, (err, info) => {
-              if (err) { console.log('error sending email notification') };
+              if (err) { console.log('error sending email notification in joining events') };
             });
           });
         }
@@ -129,7 +129,7 @@ module.exports = function(app, passport) {
             let email = require("./nodemailerTemplates/createdEvent");
             let mailOptions = email.createdEvent(req, subject);
             transporter.sendMail(mailOptions, (err, info) => {
-              if (err) { console.log('error sending email notification') };
+              if (err) { console.log('error sending email notification in creating events') };
             });
           });
         });
@@ -181,7 +181,7 @@ module.exports = function(app, passport) {
           let email = require("./nodemailerTemplates/leftEvent");
           let mailOptions = email.leftEvent(req);
           transporter.sendMail(mailOptions, (err, info) => {
-            if (err) { console.log('error sending email notification') };
+            if (err) { console.log('error sending email notification in leaving events') };
           });
         });
       });
@@ -228,7 +228,7 @@ module.exports = function(app, passport) {
         let email = require("./nodemailerTemplates/deletedEvent");
         let mailOptions = email.deletedEvent(req);
         transporter.sendMail(mailOptions, (err, info) => {
-          if (err) { console.log('error sending email notification') };
+          if (err) { console.log('error sending email notification in deleting events') };
         });
       });
     });
