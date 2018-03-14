@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 const credentials = require("../config/mysqlCredentials");
 const nodemailer = require("nodemailer");
-const { USERNAME, PASSWORD } = require("../config/nodemailerConfig.js");
+const { USERNAME, PASSWORD } = require("../config/nodemailerConfig");
 
 //nodemailer
 const transporter = nodemailer.createTransport({
@@ -20,10 +20,10 @@ module.exports = function(app, passport) {
   app.get("/events", function(req, res) {
     const connection = mysql.createConnection(credentials);
     if (req.session.passport !== undefined) {
-      let sql = require("../config/sql");
-      sql = sql.getEventsLoggedIn(req);
+      let queryGenerator = require("../includes/sql");
+      let query = queryGenerator.getEventsLoggedIn(req);
       connection.connect(() => {
-        connection.query(sql, function(err, results, fields, next) {
+        connection.query(query, function(err, results, fields, next) {
           if (err) {
             return next(err);
           }
@@ -35,10 +35,10 @@ module.exports = function(app, passport) {
         });
       });
     } else {
-      let sql = require("../config/sql");
-      sql = sql.getEventsLoggedOut();
+      let queryGenerator = require("../includes/sql");
+      let query = queryGenerator.getEventsLoggedOut();
       connection.connect(() => {
-        connection.query(sql, function(err, results, fields, next) {
+        connection.query(query, function(err, results, fields, next) {
           if (err) {
             return next(err);
           }
@@ -57,17 +57,17 @@ module.exports = function(app, passport) {
   //**************************************//
   app.post("/join_events", function(req, res) {
     const connection = mysql.createConnection(credentials);
-    let sql = require("../config/sql");
-    sql = sql.getJoinedEvents(req);
+    let queryGenerator = require("../includes/sql");
+    let query = queryGenerator.getJoinedEvents(req);
     connection.connect(() => {
-      connection.query(sql, function(err, results, next) {
+      connection.query(query, function(err, results, next) {
         if (err) {
           return next(err);
         }
         function insertUserIntoEvent() {
-          let sql = require("../config/sql");
-          sql = sql.addUserToEvent(req);
-          connection.query(sql, function(err, results, next) {
+          let queryGenerator = require("../includes/sql");
+          let query = queryGenerator.addUserToEvent(req);
+          connection.query(query, function(err, results, next) {
             if (err) {
               return next(err);
             }
@@ -91,9 +91,9 @@ module.exports = function(app, passport) {
           if (results.length == req.body.max) {
             res.end("max");
           } else {
-            let sql = require("../config/sql");
-            sql = sql.checkIfUserInEvent(req);
-            connection.query(sql, function(err, results, next) {
+            let queryGenerator = require("../includes/sql");
+            let query = queryGenerator.checkIfUserInEvent(req);
+            connection.query(query, function(err, results, next) {
               if (err) {
                 return next(err);
               }
