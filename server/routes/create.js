@@ -48,9 +48,7 @@ module.exports = function(app, passport) {
             let email = require("../nodemailerTemplates/createdEvent");
             let mailOptions = email.createdEvent(req, subject);
             transporter.sendMail(mailOptions, (err, info, next) => {
-              if (err) {
-                return next(err);
-              }
+              if (err) { console.log('error sending email notification in creating events') };
             });
           });
         });

@@ -81,9 +81,7 @@ module.exports = function(app, passport) {
             let email = require("../nodemailerTemplates/joinedEvent");
             let mailOptions = email.joinedEvent(req);
             transporter.sendMail(mailOptions, (err, info, next) => {
-              if (err) {
-                return next(err);
-              }
+              if (err) { console.log('error sending email notification in joining events') };
             });
           });
         }

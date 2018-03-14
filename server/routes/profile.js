@@ -63,9 +63,7 @@ module.exports = function(app, passport) {
           let email = require("../nodemailerTemplates/leftEvent");
           let mailOptions = email.leftEvent(req);
           transporter.sendMail(mailOptions, (err, info, next) => {
-            if (err) {
-              return next(err);
-            }
+            if (err) { console.log('error sending email notification in leaving events') };
           });
         });
       });
@@ -116,9 +114,7 @@ module.exports = function(app, passport) {
         let email = require("../nodemailerTemplates/deletedEvent");
         let mailOptions = email.deletedEvent(req);
         transporter.sendMail(mailOptions, (err, info, next) => {
-          if (err) {
-            return next(err);
-          }
+          if (err) { console.log('error sending email notification in deleting events') };
         });
       });
     });
