@@ -19,16 +19,16 @@ module.exports = function(app, passport) {
   //**************************************//
   app.post("/add_events", function(req, res) {
     const connection = mysql.createConnection(credentials);
-    let sql = require("../config/sql");
-    sql = sql.addEvent(req);
+    let queryGenerator = require("../config/sql");
+    let query = queryGenerator.addEvent(req);
     connection.connect(() => {
-      connection.query(sql, function(err, results, fields, next) {
+      connection.query(query, function(err, results, fields, next) {
         if (err) {
           return next(err);
         }
-        let sql = require("../config/sql");
-        sql = sql.addCreatorToEvent(req, results);
-        connection.query(sql, function(err, results, next) {
+        let queryGenerator = require("../config/sql");
+        let query = queryGenerator.addCreatorToEvent(req, results);
+        connection.query(query, function(err, results, next) {
           if (err) {
             return next(err);
           }
@@ -39,9 +39,9 @@ module.exports = function(app, passport) {
           res.end(JSON.stringify(output));
 
           //nodemailer
-          let sql = require("../config/sql");
-          sql = sql.getSubject(req);
-          connection.query(sql, function(err, subject, next) {
+          let queryGenerator = require("../config/sql");
+          let query = queryGenerator.getSubject(req);
+          connection.query(query, function(err, subject, next) {
             if (err) {
               return next(err);
             }

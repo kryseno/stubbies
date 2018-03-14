@@ -38,7 +38,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passport')(passport);
+require('./includes/passport')(passport);
 require('./routes/join')(app, passport);
 require('./routes/create')(app, passport);
 require('./routes/profile')(app, passport);
