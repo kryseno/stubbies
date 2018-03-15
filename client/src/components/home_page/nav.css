@@ -22,7 +22,7 @@
 }
 
 .headerName {
-    letter-spacing: 7px;
+    letter-spacing: 5px;
     margin: 0 3%;
     padding-left: 5%;
 }
@@ -104,7 +104,14 @@
     background-color: #428bca; /* #3b5998 */
     color: #f7f7f7;
 }
-
+@media (min-width: 768px) and (max-width: 1024px) {
+    .navbar-header {
+        width: 33%;
+    }
+    .headerName {
+        letter-spacing: -5px;
+    }
+}
 @media (max-width: 767px) {
     .letter {
         font-size: 249%;
@@ -141,7 +148,7 @@
     }
 
     .headerName {
-        margin: 0 3% 0 20%;
+        text-align: center
     }
 
     .otherLinks a {
@@ -165,5 +172,13 @@
 
     .narrowLinks {
         display: none;
+    }
+}
+
+@media (max-width: 320px) {
+    .headerName {
+        letter-spacing: 7px;
+        text-align: center;
+        padding-left: 0;
     }
 }
