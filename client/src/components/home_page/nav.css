@@ -36,6 +36,7 @@
     margin: 0;
 }
 
+
 .nav > li:last-child a {
     padding-top: 13px;
 }
@@ -106,10 +107,10 @@
 }
 @media (min-width: 768px) and (max-width: 1024px) {
     .navbar-header {
-        width: 33%;
+        width: 30%;
     }
     .headerName {
-        letter-spacing: -5px;
+        letter-spacing: -7px;
     }
 }
 @media (max-width: 767px) {
@@ -160,6 +161,10 @@
         margin-left: 4%;
     }
 
+    .fb-btn {
+        font-size: 14px;
+    }
+    
     .nav > .otherLinks a, .nav > .facebookLogin a {
         background-color: inherit;
         color: #3b5998;

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import FacebookLogin from './fbLogin';
 import ProfileToggle from './profile_toggle';
+import JoinToggle from './join_toggle';
 
 
 import './nav.css';
@@ -49,7 +50,7 @@ class Nav extends Component {
                                     <ProfileToggle />
                                 </li>
                                 <li>
-                                    <Link to='/join-event'>Join Event</Link>
+                                    <JoinToggle />
                                 </li>
                                 <li>
                                     <Link to='/create-event'>Create Event</Link>
@@ -84,7 +85,7 @@ class Nav extends Component {
                                     <ProfileToggle />
                                 </li>
                                 <li className="otherLinks">
-                                    <Link to='/join-event'>Join</Link>
+                                    <JoinToggle />
                                 </li>
                                 <li className="otherLinks">
                                     <Link to='/create-event'>Create</Link>
