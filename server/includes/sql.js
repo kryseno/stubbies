@@ -2,6 +2,32 @@ const mysql = require('mysql');
 const credentials = require('../config/mysqlCredentials');
 
 /*************************************************************************/
+/*                           -- passport.js --                       */
+/*************************************************************************/
+/*****************************************************/
+/*               Grab User's Facebook ID             */
+/*****************************************************/
+exports.getFacebookID = function(profile){
+    let sql = "SELECT * FROM ?? WHERE ?? = ?";
+    let inserts = ['users', 'facebookID', profile.id];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
+/*****************************************************/
+/*          Change Login Status to Logged In         */
+/*****************************************************/
+exports.userIsLoggedIn = function(profile){
+    let { id, emails: [{value: emailVal}], name: { givenName , familyName}, photos: [{value: photoVal}] } = profile;
+    let isLoggedIn = 1;
+    let sql = "INSERT INTO ??(??, ??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?, ?)";
+    let inserts = ['users', 'facebookID', 'email', 'first_name', 'last_name', 'pictureURL', 'isLoggedIn',
+        id, emailVal, givenName, familyName, photoVal, isLoggedIn];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
+/*************************************************************************/
 /*                            -- Join Page --                            */
 /*************************************************************************/
 /*****************************************************/
@@ -121,7 +147,7 @@ exports.deleteEvent = function(request){
 }
 
 /*************************************************************************/
-/*                           -- Universal Query --                          */
+/*                           -- Universal Query --                       */
 /*************************************************************************/
 /*****************************************************/
 /*                 Grab Joined Events                */
@@ -129,6 +155,29 @@ exports.deleteEvent = function(request){
 exports.getJoinedEvents = function(request){
     let sql = "SELECT ??, ??, ?? FROM ?? WHERE ?? = ?";
     let inserts = ['id', 'facebookID', 'event_id', 'joined_events', 'event_id', request.body.event_id];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
+/*************************************************************************/
+/*                           -- auth.js --                       */
+/*************************************************************************/
+/*****************************************************/
+/*               Set User As Logged In             */
+/*****************************************************/
+exports.setUserLoggedIn = function(req){
+    let sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+    let inserts = ['users', 'isLoggedIn', 1, 'facebookID', req.session.passport.user.id];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
+/*****************************************************/
+/*               Set User As Logged Out              */
+/*****************************************************/
+exports.setUserLoggedOut = function(req){
+    let sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+    let inserts = ['users', 'isLoggedIn', 0, 'facebookID', req.session.passport.user.id];
     sql = mysql.format(sql, inserts);
     return sql
 }

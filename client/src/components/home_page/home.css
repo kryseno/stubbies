@@ -88,16 +88,8 @@
     font-size: 2em;
 } */
 
-@media screen and (min-width: 769px) and (max-width: 991px) {
-    .headerName {
-        display: none;
-    }
-}
-
 @media screen and (max-width: 768px) {
-    .headerName {
-        display: none;
-    }
+
 
     .banner > h2 {
         background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.3, #fff)) 0 0 no-repeat;
