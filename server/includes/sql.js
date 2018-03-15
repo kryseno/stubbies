@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const credentials = require('./mysqlCredentials');
+const credentials = require('../config/mysqlCredentials');
 
 /*************************************************************************/
 /*                            -- Join Page --                            */

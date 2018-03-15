@@ -30,7 +30,7 @@ app.use(morgan(morgan_common, {
 
 //Session
 app.use(session({
-    secret: 'ssshhhh',
+    secret: 'session',
     resave: true,
     saveUninitialized: true
 }));
@@ -38,16 +38,19 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passport')(passport);
-// require('./routes/join')(app, passport);
-// require('./routes/create')(app, passport);
-// require('./routes/profile')(app, passport);
-require('./api')(app, passport);
+require('./includes/passport')(passport);
+require('./routes/join')(app, passport);
+require('./routes/create')(app, passport);
+require('./routes/profile')(app, passport);
 require('./auth')(app, passport);
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
+
+app.use((err, req, res, next) => {
+    res.status(500).send('Something is not right!');
+  })
 
 // Listen
 app.listen(PORT, function(){

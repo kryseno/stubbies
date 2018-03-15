@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 const credentials = require("../config/mysqlCredentials");
 const nodemailer = require("nodemailer");
-const { USERNAME, PASSWORD } = require("../config/nodemailerConfig.js");
+const { USERNAME, PASSWORD } = require("../config/nodemailerConfig");
 
 //nodemailer
 const transporter = nodemailer.createTransport({
@@ -19,10 +19,10 @@ module.exports = function(app, passport) {
   //**************************************//
   app.get("/user_joined_events", function(req, res) {
     const connection = mysql.createConnection(credentials);
-    let sql = require("../config/sql");
-    sql = sql.getUserEventsJoined(req);
+    let queryGenerator = require("../includes/sql");
+    let query = queryGenerator.getUserEventsJoined(req);
     connection.connect(() => {
-      connection.query(sql, function(err, results, next) {
+      connection.query(query, function(err, results, next) {
         if (err) {
           return next(err);
         }
@@ -40,16 +40,16 @@ module.exports = function(app, passport) {
   //**************************************//
   app.post("/leave_event", function(req, res) {
     const connection = mysql.createConnection(credentials);
-    let sql = require("../config/sql");
-    sql = sql.getJoinedEvents(req);
+    let queryGenerator = require("../includes/sql");
+    let query = queryGenerator.getJoinedEvents(req);
     connection.connect(() => {
-      connection.query(sql, function(err, results, next) {
+      connection.query(query, function(err, results, next) {
         if (err) {
           return next(err);
         }
-        let sql = require("../config/sql");
-        sql = sql.removeUserFromEvent(req);
-        connection.query(sql, function(err, results, next) {
+        let queryGenerator = require("../includes/sql");
+        let query = queryGenerator.removeUserFromEvent(req);
+        connection.query(query, function(err, results, next) {
           if (err) {
             return next(err);
           }
@@ -63,9 +63,7 @@ module.exports = function(app, passport) {
           let email = require("../nodemailerTemplates/leftEvent");
           let mailOptions = email.leftEvent(req);
           transporter.sendMail(mailOptions, (err, info, next) => {
-            if (err) {
-              return next(err);
-            }
+            if (err) { console.log('error sending email notification in leaving events') };
           });
         });
       });
@@ -77,10 +75,10 @@ module.exports = function(app, passport) {
   //**************************************//
   app.get("/user_events", function(req, res) {
     const connection = mysql.createConnection(credentials);
-    let sql = require("../config/sql");
-    sql = sql.getUserEventsCreated(req);
+    let queryGenerator = require("../includes/sql");
+    let query = queryGenerator.getUserEventsCreated(req);
     connection.connect(() => {
-      connection.query(sql, function(err, results, fields, next) {
+      connection.query(query, function(err, results, fields, next) {
         if (err) {
           return next(err);
         }
@@ -99,10 +97,10 @@ module.exports = function(app, passport) {
   //**************************************//
   app.post("/delete_events", function(req, res) {
     const connection = mysql.createConnection(credentials);
-    let sql = require("../config/sql");
-    sql = sql.deleteEvent(req);
+    let queryGenerator = require("../includes/sql");
+    let query = queryGenerator.deleteEvent(req);
     connection.connect(() => {
-      connection.query(sql, function(err, results, fields, next) {
+      connection.query(query, function(err, results, fields, next) {
         if (err) {
           return next(err);
         }
@@ -116,9 +114,7 @@ module.exports = function(app, passport) {
         let email = require("../nodemailerTemplates/deletedEvent");
         let mailOptions = email.deletedEvent(req);
         transporter.sendMail(mailOptions, (err, info, next) => {
-          if (err) {
-            return next(err);
-          }
+          if (err) { console.log('error sending email notification in deleting events') };
         });
       });
     });
