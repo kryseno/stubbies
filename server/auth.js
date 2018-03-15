@@ -14,7 +14,9 @@ module.exports = function (app, passport) {
                 let queryGenerator = require('./includes/sql');
                 let query = queryGenerator.setUserLoggedIn(req);
                 pool.query(query, function (err, results, fields) {
-                    if (err) throw err;
+                    if (err) {
+                        return next(err);
+                    }
                     res.json({
                         isLoggedIn: true
                     });
@@ -45,7 +47,9 @@ module.exports = function (app, passport) {
             let queryGenerator = require('./includes/sql');
             let query = queryGenerator.setUserLoggedOut(req);
             pool.query(query, function (err, results, fields) {
-                if (err) throw err;
+                if (err) {
+                    return next(err);
+                }
             })
             req.session.destroy();
         }
