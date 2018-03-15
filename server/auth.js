@@ -11,10 +11,9 @@ module.exports = function (app, passport) {
                     isLoggedIn: false
                 });
             } else {
-                const sess = req.session.passport.user.id;
-                let isLoggedIn = 'isLoggedIn';
-                let updateSql = `UPDATE users SET ${isLoggedIn} = 1 WHERE facebookID = ${sess}`;
-                pool.query(updateSql, function (err, results, fields) {
+                let queryGenerator = require('./includes/sql');
+                let query = queryGenerator.setUserLoggedIn(req);
+                pool.query(query, function (err, results, fields) {
                     if (err) throw err;
                     res.json({
                         isLoggedIn: true
@@ -43,14 +42,11 @@ module.exports = function (app, passport) {
     app.get('/logout',
         function (req, res) {
             res.redirect('/');
-
-            const sess = req.session.passport.user.id;
-            let isLoggedIn = 'isLoggedIn';
-            let sql = `UPDATE users SET ${isLoggedIn} = 0 WHERE facebookID = ${sess}`;
-            pool.query(sql, function (err, results, fields) {
+            let queryGenerator = require('./includes/sql');
+            let query = queryGenerator.setUserLoggedOut(req);
+            pool.query(query, function (err, results, fields) {
                 if (err) throw err;
             })
-
             req.session.destroy();
         }
     );

@@ -158,3 +158,26 @@ exports.getJoinedEvents = function(request){
     sql = mysql.format(sql, inserts);
     return sql
 }
+
+/*************************************************************************/
+/*                           -- auth.js --                       */
+/*************************************************************************/
+/*****************************************************/
+/*               Set User As Logged In             */
+/*****************************************************/
+exports.setUserLoggedIn = function(req){
+    let sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+    let inserts = ['users', 'isLoggedIn', 1, 'facebookID', req.session.passport.user.id];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
+
+/*****************************************************/
+/*               Set User As Logged Out              */
+/*****************************************************/
+exports.setUserLoggedOut = function(req){
+    let sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+    let inserts = ['users', 'isLoggedIn', 0, 'facebookID', req.session.passport.user.id];
+    sql = mysql.format(sql, inserts);
+    return sql
+}
