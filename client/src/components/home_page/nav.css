@@ -139,6 +139,7 @@
     }
     
     .narrowLinks ul {
+        width: 100%;
         position: absolute;
         background-color: whitesmoke;
         z-index: 2;
