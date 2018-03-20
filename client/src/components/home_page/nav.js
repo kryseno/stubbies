@@ -63,7 +63,7 @@ class Nav extends Component {
                     </div>
 
                     <div className="navNarrow"> {/* navbar for smaller device screens*/}
-                        <i onClick={this.burgerToggle} className="fa fa-bars fa-2x burgerToggle"></i>
+                        <i onClick={this.burgerToggle} className="fa fa-bars fa-2x burgerToggle" role="button"></i>
                         <div className="navbar-header">
                             <div className="headerName">
                                 <span className="letter" data-letter="S">S</span>
