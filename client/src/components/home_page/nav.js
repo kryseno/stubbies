@@ -78,19 +78,19 @@ class Nav extends Component {
                         </div>
                         <div className="narrowLinks">
                             <ul className="nav">
-                                <li className="otherLinks">
+                                <li className="otherLinks" onClick={this.burgerToggle}>
                                     <Link to='/'>Home</Link>
                                 </li>
-                                <li className="otherLinks">
+                                <li className="otherLinks" onClick={this.burgerToggle}>
                                     <ProfileToggle />
                                 </li>
-                                <li className="otherLinks">
+                                <li className="otherLinks" onClick={this.burgerToggle}>
                                     <JoinToggle />
                                 </li>
-                                <li className="otherLinks">
+                                <li className="otherLinks" onClick={this.burgerToggle}>
                                     <Link to='/create-event'>Create</Link>
                                 </li>
-                                <li className="facebookLogin">
+                                <li className="facebookLogin" onClick={this.burgerToggle}>
                                     <FacebookLogin />
                                 </li>
                             </ul>
