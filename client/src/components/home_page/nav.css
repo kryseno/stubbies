@@ -172,7 +172,7 @@
     }
 
     .nav > li > a:focus, .nav > li > a:hover {
-        background-color: #428bca;
+        background-color: transparent;
         color: white;
     }
 
