@@ -188,3 +188,9 @@
         padding-left: 0;
     }
 }
+
+@media (max-width: 280px) {
+    .headerName {
+        display: none;
+    }
+}
