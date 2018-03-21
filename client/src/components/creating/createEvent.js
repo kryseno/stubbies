@@ -96,7 +96,6 @@ class CreateEvent extends Component {
                 this.toggleSignInModal();
             }
         }).catch((resp) => {
-            console.log("This is the error", resp);
         })
     }
 

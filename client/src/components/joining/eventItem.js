@@ -128,7 +128,6 @@ class EventDetails extends Component {
                 isLoggedIn: resp.payload.data.isLoggedIn
             })
         }).catch((resp) => {
-            console.log("This is the error", resp);
         })
     }
 

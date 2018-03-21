@@ -3,7 +3,6 @@ const credentials = require('./config/mysqlCredentials');
 const pool = mysql.createPool(credentials);
 
 module.exports = function (app, passport) {
-
     app.get('/checkLogin',
         function (req, res) {
             if (req.session.passport === undefined) {
