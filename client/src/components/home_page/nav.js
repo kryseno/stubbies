@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import FacebookLogin from './fbLogin';
 import ProfileToggle from './profile_toggle';
+import JoinToggle from './join_toggle';
 
 
 import './nav.css';
@@ -49,7 +50,7 @@ class Nav extends Component {
                                     <ProfileToggle />
                                 </li>
                                 <li>
-                                    <Link to='/join-event'>Join Event</Link>
+                                    <JoinToggle />
                                 </li>
                                 <li>
                                     <Link to='/create-event'>Create Event</Link>
@@ -62,7 +63,7 @@ class Nav extends Component {
                     </div>
 
                     <div className="navNarrow"> {/* navbar for smaller device screens*/}
-                        <i onClick={this.burgerToggle} className="fa fa-bars fa-2x burgerToggle"></i>
+                        <i onClick={this.burgerToggle} className="fa fa-bars fa-2x burgerToggle" role="button"></i>
                         <div className="navbar-header">
                             <div className="headerName">
                                 <span className="letter" data-letter="S">S</span>
@@ -77,19 +78,19 @@ class Nav extends Component {
                         </div>
                         <div className="narrowLinks">
                             <ul className="nav">
-                                <li className="otherLinks">
+                                <li className="otherLinks" onClick={this.burgerToggle}>
                                     <Link to='/'>Home</Link>
                                 </li>
-                                <li className="otherLinks">
+                                <li className="otherLinks" onClick={this.burgerToggle}>
                                     <ProfileToggle />
                                 </li>
-                                <li className="otherLinks">
-                                    <Link to='/join-event'>Join</Link>
+                                <li className="otherLinks" onClick={this.burgerToggle}>
+                                    <JoinToggle />
                                 </li>
-                                <li className="otherLinks">
+                                <li className="otherLinks" onClick={this.burgerToggle}>
                                     <Link to='/create-event'>Create</Link>
                                 </li>
-                                <li className="facebookLogin">
+                                <li className="facebookLogin" onClick={this.burgerToggle}>
                                     <FacebookLogin />
                                 </li>
                             </ul>

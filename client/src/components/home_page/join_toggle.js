@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 import { userAuth } from '../../actions';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
-class FacebookLogin extends Component {
+class JoinLinkToggle extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             isLoggedIn: false
         }
-        this.renderLogin = this.renderLogin.bind(this);
+        this.renderJoinLink = this.renderJoinLink.bind(this);
     }
 
     componentWillMount() {
-        this.renderLogin();
+        this.renderJoinLink();
     }
 
-    renderLogin() {
+    renderJoinLink() {
 
         this.props.userAuth().then((resp) => {
             this.setState({
                 isLoggedIn: resp.payload.data.isLoggedIn
             })
         }).catch((resp) => {
+            console.log("This is the error", resp);
         })
     }
 
@@ -31,9 +33,9 @@ class FacebookLogin extends Component {
     render() {
         const { isLoggedIn } = this.state;
         if (isLoggedIn) {
-            return <a href="/logout" className="btn-sm btn-primary fb-btn"><span className="fa fa-facebook"></span> Log Out</a>
+            return <Link to='/join-event'>Join Events</Link>;
         } else {
-            return <a href="/auth/facebook" className="btn-sm btn-primary fb-btn"><span className="fa fa-facebook"></span> Log in With Facebook</a>
+            return <Link to='/browse-event'>Browse Events</Link>
         }
     }
 }
@@ -44,4 +46,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { userAuth })(FacebookLogin);
+export default connect(mapStateToProps, { userAuth })(JoinLinkToggle);

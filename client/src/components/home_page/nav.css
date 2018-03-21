@@ -36,6 +36,7 @@
     margin: 0;
 }
 
+
 .nav > li:last-child a {
     padding-top: 13px;
 }
@@ -106,10 +107,10 @@
 }
 @media (min-width: 768px) and (max-width: 1024px) {
     .navbar-header {
-        width: 33%;
+        width: 30%;
     }
     .headerName {
-        letter-spacing: -5px;
+        letter-spacing: -7px;
     }
 }
 @media (max-width: 767px) {
@@ -138,6 +139,7 @@
     }
     
     .narrowLinks ul {
+        width: 100%;
         position: absolute;
         background-color: whitesmoke;
         z-index: 2;
@@ -160,13 +162,17 @@
         margin-left: 4%;
     }
 
+    .fb-btn {
+        font-size: 14px;
+    }
+    
     .nav > .otherLinks a, .nav > .facebookLogin a {
         background-color: inherit;
         color: #3b5998;
     }
 
     .nav > li > a:focus, .nav > li > a:hover {
-        background-color: #428bca;
+        background-color: transparent;
         color: white;
     }
 
@@ -180,5 +186,11 @@
         letter-spacing: 7px;
         text-align: center;
         padding-left: 0;
+    }
+}
+
+@media (max-width: 280px) {
+    .headerName {
+        display: none;
     }
 }
