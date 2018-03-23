@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/kryseno/stubbies/finalDev/client/src/assets/images/logo.png">
+<img src="https://raw.githubusercontent.com/kryseno/stubbies/master/client/src/assets/images/logo.png">
 
 ## About Stubbies
 Stubbies was designed for students by students. It is a social networking application that allows students to join and create study groups with other students located in their area.
